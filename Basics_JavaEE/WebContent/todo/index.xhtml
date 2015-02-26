@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:body>
+
+		<h:form>
+
+			<ul>
+
+				<!-- h:commandLink> renders a HTML <a> element with an onclick script which submits a (hidden) POST form
+				 and can invoke a managed bean action method. 
+				 It's also required to be placed inside a <h:form>. 
+				 -->
+				<li><h:commandLink type="submit" value="Create New Todo" action="create" /></li>
+				<li><h:commandLink type="submit" value="Show All Todos" action="todos" /></li>
+
+				<!-- 
+				h:outputLink renders a fullworthy HTML <a> element with the proper URL in the href attribute 
+				which fires a bookmarkable GET request. It cannot directly invoke a managed bean action method. 
+				-->
+				<li><h:outputLink value="todos.xhtml">Show All Todos</h:outputLink></li>
+
+			</ul>
+
+		</h:form>
+
+	</h:body>
+</h:head>
+</html>

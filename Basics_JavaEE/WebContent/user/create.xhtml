@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet name="screen.css" />
+	<h:outputStylesheet name="dropdown.css" />
+	<title>#{bundle.pageTitle}</title>
+</h:head>
+
+<h:body>
+
+		<h:outputText value="#{bundle.registerUser}" styleClass="label" />
+		
+	<h:form id="create">
+
+		<!-- table <h:panelGrid columns="2"> -->
+
+		
+		<h:outputLabel for="title" value="#{bundle.username}" />
+		<h:inputText id="title" value="#{userBean.user.username}" size="15" required="true">
+			<f:validateLength minimum="2" maximum="10" />
+		</h:inputText>
+		<h:message for="title" style="color:red" />
+
+		<br />
+		<br />
+		<h:outputLabel for="pwd" value="#{bundle.password}" />
+		<h:inputSecret id="pwd" value="#{userBean.user.rawPassword}" size="15" required="true">
+			<f:validateLength minimum="2" maximum="30" />
+		</h:inputSecret>
+		<h:message for="pwd" style="color:red" />
+
+		<!-- table </h:panelGrid> -->
+		<br />
+		<br />
+		<h:commandButton type="submit" id="create" value="Create" action="#{userBean.createUser}" />
+	</h:form>
+</h:body>
+
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="Basics_JavaEE_PU"
+		transaction-type="JTA">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>java:/OracleXeDS</jta-data-source>
+
+		<class>entity.Todo</class>
+		<class>entity.Employee</class>
+		<class>entity.Certificate</class>
+
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<!-- Hibernate envers - Unlike in previous versions, you no longer need 
+				to specify listeners in the Hibernate configuration file -->
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

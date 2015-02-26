@@ -1,0 +1,154 @@
+package ejb;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+import entity.Todo;
+
+@Stateless
+public class TodoServiceImpl implements TodoServiceRemote, TodoService {
+
+	private static final Logger LOGGER = Logger.getLogger(TodoServiceImpl.class.getName());
+
+	//The entity manager is similar to the Hibernate Session class
+	//Applications use it to create/read/update/delete data
+	@PersistenceContext(unitName = "Basics_JavaEE_PU")
+	EntityManager em;
+
+	Configuration configuration;
+	private SessionFactory sessionFactory;
+
+	public TodoServiceImpl() {
+
+		LOGGER.log(Level.FINE, "Constructor, TodoServiceImpl() ");
+
+		configuration = (new Configuration()).configure();
+		StandardServiceRegistryBuilder builder = (new StandardServiceRegistryBuilder()).applySettings(configuration
+				.getProperties());
+		sessionFactory = configuration.buildSessionFactory(builder.build());
+
+	}
+
+	@Override
+	public List getAllTodos() {
+		
+		//Session session = sessionFactory.openSession();
+		//session.beginTransaction();
+		//List todoList = session.createQuery("from Todo").list();
+		
+	    Query query = em.createQuery("SELECT t FROM Todo t");
+	    //query.setLockMode(LockModeType.OPTIMISTIC);
+	    List<Todo> todoList = (List<Todo>) query.getResultList();
+		
+		
+		Todo todo;
+		for (Iterator iterator = todoList.iterator(); iterator.hasNext(); System.out.println((new StringBuilder(
+				"Todo : ")).append(todo.getTitle()).toString())) {
+			todo = (Todo) iterator.next();
+		}
+
+		//session.getTransaction().commit();
+		//session.close();
+		return todoList;
+	}
+
+	@Override
+	public void persistTodo(Todo todo) {
+
+		/**
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(todo);
+		session.getTransaction().commit();
+		session.close();
+		**/
+
+		LOGGER.log(Level.INFO, "Using The entity manager ");
+		//em.lock(todo, LockModeType.OPTIMISTIC);
+		em.persist(todo);
+	}
+
+	@Override
+	public Todo findTodo(long tid) {
+		return getTodoById(tid);
+	}
+
+	@Override
+	public Todo updateTodo(Todo todo) {
+		
+		Todo result;
+		LOGGER.log(Level.WARNING, "MK: Merging todo.");
+		result = em.merge(todo);
+		LOGGER.log(Level.WARNING, "MK: Done merging todo.");
+		
+		LOGGER.log(Level.WARNING, "MK: Flushing changes.");
+		flushChanges();
+		LOGGER.log(Level.WARNING, "MK: Done flushChanges.");
+			
+		return result;
+		
+		
+/*		
+		Session session;
+		Transaction tx;
+		session = sessionFactory.openSession();
+		tx = null;
+		try {
+			tx = session.beginTransaction();
+			Todo currentTodo = (Todo) session.get(Todo.class, Long.valueOf(todo.getId()));
+			currentTodo.setTitle(todo.getTitle());
+			currentTodo.setDescription(todo.getDescription());
+			session.update(currentTodo);
+			tx.commit();
+
+		} catch (RuntimeException e) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rbe) {
+				LOGGER.log(Level.SEVERE, "Couldn’t roll back transaction", rbe);
+			}
+			throw e;
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		*/
+	}
+
+	@Override
+	public Todo getTodoById(long tid) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Todo t = (Todo) session.get(Todo.class, Long.valueOf(tid));
+		session.getTransaction().commit();
+		session.close();
+		return t;
+	}
+	
+	protected void flushChanges(){
+		
+		try{
+			em.flush();
+		}catch (OptimisticLockException e) {
+			LOGGER.log(Level.WARNING, "MK: The operation encountered an OptimisticLockException!");
+			throw e;
+			
+		}
+	}
+
+}

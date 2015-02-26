@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resources/css/font-awesome-4.3.0/css/font-awesome.css" />
+<!-- ie7 fix -->
+<link rel="stylesheet" type="text/css" href="../resources/css/font-awesome-4.3.0/css/font-awesome-ie7.min.css" />
+
+<style type="text/css">
+.FA {
+	font-family: FontAwesome;
+}
+
+.inputFA {
+	font-family: FontAwesome;
+	width: 200px;
+	height: 35px;
+	margin-top: 10px;
+	padding-left: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	-moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	background-color: #fff;
+	border: solid 1px #cbc9c9;
+}
+
+.inputFA:before {
+	font-family: FontAwesome;
+	font-size: 13px; /* increase/decrease size of font */
+	font-style: normal;
+	font-weight: normal;
+	color: #666666; /* font color selection */
+	content: "&#xf002;"; /* content value for icon-search */
+	text-decoration: inherit;
+	margin-left: 23px;
+	/* or use 'left' to position within search input area */
+	margin-top: 15px;
+	/* or use 'top' to position within search input area */
+	position: absolute; /* must be set to absolute */
+}
+
+.btnMK {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px
+}
+
+.btn-submit {
+	font-family: FontAwesome;
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da -webkit-appearance: button;
+	cursor: pointer
+}
+
+.btn-submit.active, .btn-submit.focus, .btn-submit:active, .btn-submit:focus,
+	.btn-submit:hover, .open>.dropdown-toggle.btn-submit {
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74
+}
+</style>
+</head>
+
+<body data-spy="scroll" data-offset="0" data-target="#navbar1">
+
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="topNav" role="banner" >
+
+			<div class="container">
+
+				<div class="navbar-header">
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar1">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="glyphicon glyphicon-user"></span>
+					</button>
+					<a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-home"></span> MK
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbar1">
+
+					<ul class="nav navbar-nav">
+						<li class="active page-scroll"><a href="#link1">Link <span class="sr-only">(current)</span></a></li>
+						<li><a href="#link2">Link 2</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+								<li class="divider"></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Signed in as MK <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul></li>
+						<li><p class="navbar-text">Some Text</p></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	</header>
+
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Bring Bootstrap to life</h1>
+			<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on
+				the web.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" role="button"> Learn more</a>
+			</p>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+		<div class="row" style="background-color: #CECECE">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Bring Bootstrap to life</h1>
+						<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects
+							on the web.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+
+		<!-- Main hero unit for a primary marketing message or call to action -->
+		<div class="hero-unit">
+			<h1>Hello, world!</h1>
+			<p>This is a template for a simple marketing or informational website. It includes a large callout called the
+				hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+			<p>
+				<a class="btn btn-primary btn-large">Learn more &raquo;</a>
+			</p>
+		</div>
+
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Heading</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+					condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+					sed odio dui.</p>
+				<p>
+					<a class="btn btn-default" href="#">View details &raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Heading</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+					condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+					sed odio dui.</p>
+				<p>
+					<a class="btn" href="#">View details &raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Heading</h2>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
+					felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
+					justo sit amet risus.</p>
+				<p>
+					<a class="btn" href="#">View details &raquo;</a>
+				</p>
+			</div>
+		</div>
+
+		<hr>
+
+
+
+
+
+
+		<div class="bs-docs-header" id="content">
+			<div class="container">
+				<h1>JavaScript</h1>
+				<p>Bring Bootstrap's components to life with over a dozen custom jQuery plugins. Easily include them all, or one
+					by one.</p>
+			</div>
+		</div>
+
+		<div class="jumbotron">
+			<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on
+				the web.</p>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8 col-md-4">
+				<div class="thumbnail">
+					<img src="../resources/images/wave.med.gif" alt="wave">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>...</p>
+						<p>
+							<a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<span id="link1"></span>
+		<!-- Font Awesome in placeholder -->
+		<br /> <input type="text" placeholder="&#xf002; Search Blog" class="inputFA" /> <br /> <br />
+		<!-- add FA before bootstrap class -->
+		<input type="submit" value="&#xf002; Search Blog" class="FA btn btn-danger" /><br /> <br />
+
+		<h2>
+			Alerts <small>Provide contextual feedback messages</small>
+		</h2>
+		<div class="alert alert-danger">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <span class="sr-only">Error:</span>
+			Enter a valid email address
+		</div>
+
+		<h2>Dismissable Alert</h2>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Warning!</strong> Better check yourself, you're not looking too good.
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-4 list-group">
+				<a href="#" class="list-group-item active">
+					<h4 class="list-group-item-heading">List group item heading</h4>
+					<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+						varius blandit.</p>
+				</a> <a href="#" class="list-group-item ">
+					<h4 class="list-group-item-heading">List group item heading</h4>
+					<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+						varius blandit.</p>
+				</a> <a href="#" class="list-group-item ">
+					<h4 class="list-group-item-heading">List group item heading</h4>
+					<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+						varius blandit.</p>
+				</a>
+			</div>
+		</div>
+		<div>
+			<span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>Cloud
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-group">
+					<span class="input-group-addon" id="userName1"> <span class="glyphicon glyphicon-user"></span>
+					</span> <input type="text" class="form-control" placeholder="Username" aria-describedby="userName1">
+				</div>
+
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+					<span class="input-group-addon" id="basic-addon2">@example.com</span>
+				</div>
+			</div>
+		</div>
+
+		<br />
+
+		<div class="jumbotron">
+			<h1>Bootstrap Tutorial</h1>
+			<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on
+				the web.</p>
+		</div>
+		<h2>Contextual Colors</h2>
+		<p>Use the contextual classes to provide "meaning through colors":</p>
+		<p class="text-muted">This text is muted.</p>
+		<p class="text-primary">This text is important.</p>
+		<p class="text-success">This text indicates success.</p>
+		<p class="text-info">This text represents some information.</p>
+		<p class="text-warning">This text represents a warning.</p>
+		<p class="text-danger">This text represents danger.</p>
+
+		<h2>Button Styles</h2>
+		<button type="button" class="btn btn-default">UTF+E001 Default</button>
+		<button type="button" class="btn btn-primary">Primary</button>
+		<button type="button" class="btn btn-success">Success</button>
+		<button type="button" class="btn btn-info">Info</button>
+		<button type="button" class="btn btn-warning">Warning</button>
+		<button type="button" class="btn btn-danger">Danger</button>
+		<button type="button" class="btn btn-link">Link</button>
+		<br /> <br /> <input type="submit" class="btn btn-default" value="Submit Button" /> <input type="submit"
+			class="btn btn-primary disabled" value="Disabled"> <input type="submit" class="btn btn-success"
+			value="Submit Button">
+
+		<button class="btn btn-primary" type="button">
+			Messages <span class="badge">4</span>
+		</button>
+
+		<h2>Button Group</h2>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary">Apple</button>
+			<button type="button" class="btn btn-primary">Samsung</button>
+			<button type="button" class="btn btn-primary">Sony</button>
+		</div>
+		<h2>Nesting Button Groups</h2>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary">Apple</button>
+			<button type="button" class="btn btn-primary">Samsung</button>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					Sony <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Tablet</a></li>
+					<li><a href="#">Smartphone</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<h2 id="link2">Glyphicon Examples</h2>
+		<p>
+			Envelope icon: <span class="glyphicon glyphicon-envelope"></span>
+		</p>
+		<p>
+			Envelope icon as a link: <a href="#"><span class="glyphicon glyphicon-envelope"></span></a>
+		</p>
+		<p>
+			Search icon: <span class="glyphicon glyphicon-search"></span>
+		</p>
+		<p>
+			Search icon on a button:
+			<button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-search"></span> Search
+			</button>
+		</p>
+		<p>
+			Search icon on a styled button:
+			<button type="button" class="btn btn-info">
+				<span class="glyphicon glyphicon-search"></span> Search
+			</button>
+		</p>
+		<p>
+			Search icon on a styled submit: <input type="submit" class="btn btn-info" value="MK"><span
+				class="glyphicon glyphicon-search"></span> </input>
+		</p>
+		<p>
+			Print icon: <span class="glyphicon glyphicon-print"></span>
+		</p>
+		<p>
+			Print icon on a styled link button: <a href="#" class="btn btn-success btn-lg"> <span
+				class="glyphicon glyphicon-print"></span> Print
+			</a>
+		</p>
+
+		<h2>Table Example</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>John</td>
+					<td>Doe</td>
+					<td>john@example.com</td>
+				</tr>
+				<tr class="success">
+					<td>Mary</td>
+					<td>Moe</td>
+					<td>mary@example.com</td>
+				</tr>
+				<tr>
+					<td>July</td>
+					<td>Dooley</td>
+					<td>july@example.com</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+		<h2>Horizontal form</h2>
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Email:</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">@</span> <input type="text" class="form-control"
+							placeholder="Username" aria-describedby="basic-addon1">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="pwd">Password:</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="pwd" placeholder="Enter password">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label><input type="checkbox"> Remember me</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</div>
+
+			<h2>Form control: checkbox</h2>
+			<p>The form below contains three checkboxes. The last option is disabled:</p>
+
+			<div class="checkbox">
+				<label><input type="checkbox" value="">Option 1</label>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" value="">Option 2</label>
+			</div>
+			<div class="checkbox disabled">
+				<label><input type="checkbox" value="" disabled>Option 3</label>
+			</div>
+
+			<div class="form-group has-warning has-feedback">
+				<label class="col-sm-2 control-label" for="inputWarning">Input with warning and glyphicon</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputWarning"> <span
+						class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+				</div>
+			</div>
+
+		</form>
+
+
+
+		<h2>Pagination</h2>
+		<ul class="pagination">
+			<li><a href="#">1</a></li>
+			<li class="active"><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+		</ul>
+
+	</div>
+
+
+
+
+	<div class="row">
+		<div class="col-sm-4">.col-sm-4</div>
+		<div class="col-sm-8">.col-sm-8</div>
+	</div>
+</body>
+
+</html>

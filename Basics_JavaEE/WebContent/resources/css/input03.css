@@ -1,0 +1,80 @@
+@import
+	url('http://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+body, input, textarea, select {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: #4c4c4c;
+}
+
+.FA{
+	font-family: FontAwesome;
+}
+
+.inputFA {
+	
+	width: 200px;
+	height: 35px;
+	margin-top: 10px;
+	padding-left: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	-moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, .09);
+	background-color: #fff;
+	border: solid 1px #cbc9c9;
+}
+
+.inputFA:before {
+	font-family: FontAwesome;
+	font-size: 13px; /* increase/decrease size of font */
+	font-style: normal;
+	font-weight: normal;
+	color: #666666; /* font color selection */
+	content: "&#xf002;"; /* content value for icon-search */
+	text-decoration: inherit;
+	margin-left: 23px;
+	/* or use 'left' to position within search input area */
+	margin-top: 15px;
+	/* or use 'top' to position within search input area */
+	position: absolute; /* must be set to absolute */
+}
+
+.btnMK {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px
+}
+
+.btn-submit {
+	font-family: FontAwesome;
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da -webkit-appearance: button;
+	cursor: pointer
+}
+
+.btn-submit.active, .btn-submit.focus, .btn-submit:active, .btn-submit:focus,
+	.btn-submit:hover, .open>.dropdown-toggle.btn-submit {
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74
+}

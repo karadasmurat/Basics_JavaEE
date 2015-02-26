@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>LIST</title>
+	<!-- 	<h:outputStylesheet name="style.css" /> -->
+	<!--  <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css" />-->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- Bootstrap CDN to add Font Awesome -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	
+	<link rel="stylesheet" href="../resources/css/opensans.css" />
+	<style type="text/css">
+.FA {
+	font-family: FontAwesome;
+}
+</style>
+</h:head>
+
+<h:body>
+
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bootstrap theme</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li ><h:link outcome="todos"><span class="glyphicon glyphicon-home"></span> Home</h:link></li>
+            <li class="active"><h:link outcome="create"><span class="glyphicon glyphicon-plus"></span> Create</h:link></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+	<h:panelGroup layout="block" styleClass="container">
+
+		<h:panelGroup layout="block" styleClass="jumbotron">
+			<h1>Todo Create</h1>
+		</h:panelGroup>
+
+		<h:form id="create">
+
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Todo Title" for="title" />
+				<h:inputText id="title" value="#{todoBean.todo.title}" size="15" required="true" p:placeholder="&#xf002; Title"
+					styleClass="FA form-control">
+					<f:validateLength minimum="2" maximum="10" />
+				</h:inputText>
+
+				<h:message for="title" style="color:red" />
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Todo Description" for="description" />
+				<h:inputText id="description" value="#{todoBean.todo.description}" size="15" required="true"
+					p:placeholder="&#xf002; Description" styleClass="FA form-control">
+					<f:validateLength minimum="2" maximum="250" />
+				</h:inputText>
+				<h:message for="description" style="color:red" />
+			</h:panelGroup>
+
+			<h:commandButton type="submit" id="create" value="&#xf0c7; Create" action="#{todoBean.persist}"
+				styleClass="FA btn btn-danger" />
+		</h:form>
+
+	</h:panelGroup>
+
+</h:body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+
+There are three ways of inserting a style sheet:
+
+    External style sheet 	<link rel="stylesheet" type="text/css" href="mystyle.css">
+    Internal style sheet
+    Inline style 			<h1 style="color:blue;margin-left:30px;">This is a heading.</h1>
+    
+    1. The element selector selects elements based on the element name:
+    You can select all <p> elements on a page:
+    p {
+    	text-align: center;
+    	color: red;
+	}	
+	
+	2.The id selector uses the id attribute of an HTML element to select a specific element
+	#para1 {
+    	text-align: center;
+    	color: red;
+	} 
+	
+	3.The class selector selects elements with a specific class attribute:
+	.center {
+    	text-align: center;
+    	color: red;
+	}
+	
+	you can group the selectors, to minimize the code:
+	h1, h2, p {
+    	text-align: center;
+    	color: red;
+	}
+
+
+ -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+<!-- ie7 fix -->
+<link rel="stylesheet" type="text/css" href="../resources/css/font-awesome-4.3.0/css/font-awesome-ie7.min.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/01.css" />
+</head>
+<body>
+
+	<ul class="fa-ul">
+		<li><i class="fa-li fa fa-check-square"></i>List icons</li>
+		<li><i class="fa-li fa fa-check-square"></i>can be used</li>
+		<li><i class="fa-li fa fa-spinner fa-spin"></i>as bullets</li>
+		<li><i class="fa-li fa fa-square"></i>in lists</li>
+	</ul>
+
+	<div class="search">
+		<input placeholder="Search term" class="inputBG">
+	</div>
+
+
+		&nbsp;&nbsp;<input placeholder="&#xf002; Search Blog" class="inputFA">
+
+	<BR />
+
+	<div class="testbox">
+		<h1>Registration</h1>
+
+		<form action="/">
+			<hr>
+			<div class="accounttype">
+				<input type="radio" value="None" id="radioOne" name="account" checked /> <label for="radioOne" class="radio" chec>Personal</label>
+				<input type="radio" value="None" id="radioTwo" name="account" /> <label for="radioTwo" class="radio">Company</label>
+			</div>
+			<hr>
+			<label id="icon" for="name"><i class="icon-envelope "></i></label> <input type="text" name="name" id="name"
+				placeholder="Email" required /> <label id="icon" for="name"><i class="icon-user"></i></label> <input type="text"
+				name="name" id="name" placeholder="Name" required /> <label id="icon" for="name"><i class="icon-shield"></i></label>
+			<input type="password" name="name" id="name" placeholder="Password" required />
+			<div class="gender">
+				<input type="radio" value="None" id="male" name="gender" checked /> <label for="male" class="radio" chec>Male</label>
+				<input type="radio" value="None" id="female" name="gender" /> <label for="female" class="radio">Female</label>
+			</div>
+			<p>
+				By clicking Register, you agree on our <a href="#">terms and condition</a>.
+			</p>
+			<a href="#" class="button">Register</a> <input type="submit" value="&#xf002;" class="mySubmit" />
+		</form>
+	</div>
+
+</body>
+</html>
