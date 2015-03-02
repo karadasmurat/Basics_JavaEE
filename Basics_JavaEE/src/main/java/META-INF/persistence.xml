@@ -12,6 +12,8 @@
 		<class>entity.Todo</class>
 		<class>entity.Employee</class>
 		<class>entity.Certificate</class>
+		<class>entity.LogRecord</class>
+		<class>entity.User</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />

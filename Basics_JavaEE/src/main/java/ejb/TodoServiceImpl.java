@@ -21,47 +21,48 @@ import entity.Todo;
 @Stateless
 public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 
-	private static final Logger LOGGER = Logger.getLogger(TodoServiceImpl.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TodoServiceImpl.class
+			.getName());
 
-	//The entity manager is similar to the Hibernate Session class
-	//Applications use it to create/read/update/delete data
+	// The entity manager is similar to the Hibernate Session class
+	// Applications use it to create/read/update/delete data
+	
+	//Injecting an EntityManagerInstance 
 	@PersistenceContext(unitName = "Basics_JavaEE_PU")
 	EntityManager em;
 
-	Configuration configuration;
-	private SessionFactory sessionFactory;
+	// Configuration configuration;
+	// private SessionFactory sessionFactory;
 
 	public TodoServiceImpl() {
 
-		LOGGER.log(Level.FINE, "Constructor, TodoServiceImpl() ");
+		LOGGER.log(Level.FINE, "MK: Constructing TodoServiceImpl ");
 
-		configuration = (new Configuration()).configure();
-		StandardServiceRegistryBuilder builder = (new StandardServiceRegistryBuilder()).applySettings(configuration
-				.getProperties());
-		sessionFactory = configuration.buildSessionFactory(builder.build());
+		// configuration = (new Configuration()).configure();
+		// StandardServiceRegistryBuilder builder = (new
+		// StandardServiceRegistryBuilder())
+		// .applySettings(configuration.getProperties());
+		// sessionFactory = configuration.buildSessionFactory(builder.build());
 
 	}
 
 	@Override
-	public List getAllTodos() {
-		
-		//Session session = sessionFactory.openSession();
-		//session.beginTransaction();
-		//List todoList = session.createQuery("from Todo").list();
-		
-	    Query query = em.createQuery("SELECT t FROM Todo t");
-	    //query.setLockMode(LockModeType.OPTIMISTIC);
-	    List<Todo> todoList = (List<Todo>) query.getResultList();
-		
-		
-		Todo todo;
-		for (Iterator iterator = todoList.iterator(); iterator.hasNext(); System.out.println((new StringBuilder(
-				"Todo : ")).append(todo.getTitle()).toString())) {
-			todo = (Todo) iterator.next();
+	public List<Todo> getAllTodos() {
+
+		// Session session = sessionFactory.openSession();
+		// session.beginTransaction();
+		// List todoList = session.createQuery("from Todo").list();
+
+		Query query = em.createQuery("SELECT t FROM Todo t");
+		// query.setLockMode(LockModeType.OPTIMISTIC);
+		List<Todo> todoList = query.getResultList();
+
+		for (Todo todo : todoList) {
+			LOGGER.log(Level.FINE, "MK: Todo - " + todo.getTitle());
 		}
 
-		//session.getTransaction().commit();
-		//session.close();
+		// session.getTransaction().commit();
+		// session.close();
 		return todoList;
 	}
 
@@ -69,15 +70,13 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 	public void persistTodo(Todo todo) {
 
 		/**
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(todo);
-		session.getTransaction().commit();
-		session.close();
-		**/
+		 * Session session = sessionFactory.openSession();
+		 * session.beginTransaction(); session.save(todo);
+		 * session.getTransaction().commit(); session.close();
+		 **/
 
 		LOGGER.log(Level.INFO, "Using The entity manager ");
-		//em.lock(todo, LockModeType.OPTIMISTIC);
+		// em.lock(todo, LockModeType.OPTIMISTIC);
 		em.persist(todo);
 	}
 
@@ -88,66 +87,61 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 
 	@Override
 	public Todo updateTodo(Todo todo) {
-		
-		Todo result;
-		LOGGER.log(Level.WARNING, "MK: Merging todo.");
-		result = em.merge(todo);
+
+		Todo result = em.merge(todo);
 		LOGGER.log(Level.WARNING, "MK: Done merging todo.");
-		
-		LOGGER.log(Level.WARNING, "MK: Flushing changes.");
+
 		flushChanges();
 		LOGGER.log(Level.WARNING, "MK: Done flushChanges.");
-			
-		return result;
-		
-		
-/*		
-		Session session;
-		Transaction tx;
-		session = sessionFactory.openSession();
-		tx = null;
-		try {
-			tx = session.beginTransaction();
-			Todo currentTodo = (Todo) session.get(Todo.class, Long.valueOf(todo.getId()));
-			currentTodo.setTitle(todo.getTitle());
-			currentTodo.setDescription(todo.getDescription());
-			session.update(currentTodo);
-			tx.commit();
 
-		} catch (RuntimeException e) {
-			try {
-				tx.rollback();
-			} catch (RuntimeException rbe) {
-				LOGGER.log(Level.SEVERE, "Couldn’t roll back transaction", rbe);
-			}
-			throw e;
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		
-		*/
+		return result;
+
+		/*
+		 * Session session; Transaction tx; session =
+		 * sessionFactory.openSession(); tx = null; try { tx =
+		 * session.beginTransaction(); Todo currentTodo = (Todo)
+		 * session.get(Todo.class, Long.valueOf(todo.getId()));
+		 * currentTodo.setTitle(todo.getTitle());
+		 * currentTodo.setDescription(todo.getDescription());
+		 * session.update(currentTodo); tx.commit();
+		 * 
+		 * } catch (RuntimeException e) { try { tx.rollback(); } catch
+		 * (RuntimeException rbe) { LOGGER.log(Level.SEVERE,
+		 * "Couldn’t roll back transaction", rbe); } throw e; } finally { if
+		 * (session != null) { session.close(); } }
+		 */
 	}
 
 	@Override
 	public Todo getTodoById(long tid) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		Todo t = (Todo) session.get(Todo.class, Long.valueOf(tid));
-		session.getTransaction().commit();
-		session.close();
-		return t;
+
+		// Session session = sessionFactory.openSession();
+		// session.beginTransaction();
+		// Todo t = (Todo) session.get(Todo.class, Long.valueOf(tid));
+		// session.getTransaction().commit();
+		// session.close();
+
+		return em.find(Todo.class, tid);
 	}
-	
-	protected void flushChanges(){
-		
-		try{
+
+	public void removeTodo(long tid) {
+
+		Todo todo = em.find(Todo.class, tid);
+		if (todo != null) {
+			em.remove(todo);
+		}
+
+	}
+
+	protected void flushChanges() {
+
+		try {
 			em.flush();
-		}catch (OptimisticLockException e) {
-			LOGGER.log(Level.WARNING, "MK: The operation encountered an OptimisticLockException!");
+		} catch (OptimisticLockException e) {
+			LOGGER.log(Level.WARNING,
+					"MK: The operation encountered an OptimisticLockException!");
 			throw e;
-			
+
 		}
 	}
 

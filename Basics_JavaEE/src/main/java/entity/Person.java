@@ -5,67 +5,55 @@
 
 package entity;
 
-
 // Referenced classes of package entity:
 //            Gender, Status
 
-public class Person
-{
+public class Person {
 
-    public Person()
-    {
-        gender = Gender.MALE;
-        status = Status.APPROVED;
-    }
+	public Person() {
+		gender = Gender.MALE;
+		status = Status.APPROVED;
+	}
 
-    public Person(String arg0, Gender arg1)
-    {
-        name = arg0;
-        gender = arg1;
-    }
+	public Person(String arg0, Gender arg1) {
+		name = arg0;
+		gender = arg1;
+	}
 
-    public int getId()
-    {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName()
-    {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Gender getGender()
-    {
-        return gender;
-    }
+	public Gender getGender() {
+		return gender;
+	}
 
-    public void setGender(Gender gender)
-    {
-        this.gender = gender;
-    }
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
 
-    public Status getStatus()
-    {
-        return status;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public void setStatus(Status status)
-    {
-        this.status = status;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
-    private int id;
-    private String name;
-    private Gender gender;
-    private Status status;
+	private int id;
+	private String name;
+	private Gender gender;
+	private Status status;
 }

@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PostPersist;
@@ -48,12 +50,16 @@ public class Todo implements Serializable {
 	@Column(name = "UPDATE_DATE")
 	private Calendar updateDate;
 	
+	@Enumerated(EnumType.STRING)
+	private TodoStatus status;
+	
 	@Version
 	private long version;
 
 	public Todo() {
 		title = "";
 		description = "";
+		status = TodoStatus.NOTSTARTED;
 	}
 
 	@PostUpdate

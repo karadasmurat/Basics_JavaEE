@@ -9,13 +9,15 @@ import entity.Todo;
 @Local
 public interface TodoService {
 
-	public abstract List getAllTodos();
+	public List<Todo> getAllTodos();
 
-	public abstract void persistTodo(Todo todo);
+	public void persistTodo(Todo todo);
 
-	public abstract Todo findTodo(long l);
+	public Todo findTodo(long id);
 
-	public abstract Todo updateTodo(Todo todo);
+	public Todo updateTodo(Todo todo);
 
-	public abstract Todo getTodoById(long l);
+	public Todo getTodoById(long id);
+	
+	public void removeTodo(long id);
 }

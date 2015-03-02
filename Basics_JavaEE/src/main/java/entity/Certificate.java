@@ -52,6 +52,14 @@ public class Certificate {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Set getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set employees) {
+		this.employees = employees;
+	}
 
 	/*
 	 * Generated identifiers: Hibernate will only assign identifier values to
@@ -96,5 +104,9 @@ public class Certificate {
 	public String toString() {
 		return getId() + ":" + getName();
 	}
+
+
+	
+	
 
 }
