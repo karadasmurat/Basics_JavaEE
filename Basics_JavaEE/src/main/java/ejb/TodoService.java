@@ -14,6 +14,8 @@ public interface TodoService {
 	public void persistTodo(Todo todo);
 
 	public Todo findTodo(long id);
+	
+	public String findTodoByTitle(String arg);
 
 	public Todo updateTodo(Todo todo);
 

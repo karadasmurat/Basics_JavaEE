@@ -26,8 +26,8 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 
 	// The entity manager is similar to the Hibernate Session class
 	// Applications use it to create/read/update/delete data
-	
-	//Injecting an EntityManagerInstance 
+
+	// Injecting an EntityManagerInstance
 	@PersistenceContext(unitName = "Basics_JavaEE_PU")
 	EntityManager em;
 
@@ -53,7 +53,9 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 		// session.beginTransaction();
 		// List todoList = session.createQuery("from Todo").list();
 
-		Query query = em.createQuery("SELECT t FROM Todo t");
+		// Query query = em.createQuery("SELECT t FROM Todo t");
+		Query query = em.createNamedQuery("Todo.findAll");
+
 		// query.setLockMode(LockModeType.OPTIMISTIC);
 		List<Todo> todoList = query.getResultList();
 
@@ -64,6 +66,13 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 		// session.getTransaction().commit();
 		// session.close();
 		return todoList;
+	}
+
+	public String findTodoByTitle(String arg) {
+		
+		Todo result= (Todo) em.createNamedQuery("Todo.findByTitle")
+				.setParameter("title", arg).getSingleResult();
+		return result.getTitle();
 	}
 
 	@Override
