@@ -86,6 +86,8 @@ public class TodoServiceImpl implements TodoServiceRemote, TodoService {
 
 		LOGGER.log(Level.INFO, "Using The entity manager ");
 		// em.lock(todo, LockModeType.OPTIMISTIC);
+		
+		
 		em.persist(todo);
 	}
 

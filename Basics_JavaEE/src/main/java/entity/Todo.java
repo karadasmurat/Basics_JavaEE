@@ -9,6 +9,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -23,6 +25,10 @@ import org.hibernate.envers.Audited;
 @Entity
 @Audited
 @Table(name = "TBL_TODO")
+@NamedQueries({ 
+	@NamedQuery(name="Todo.findAll", query="SELECT t FROM Todo t"),
+	@NamedQuery(name="Todo.findByTitle", query="SELECT t FROM Todo t where t.title = :title") 
+})
 public class Todo implements Serializable {
 
 	private static final long serialVersionUID = 1L;

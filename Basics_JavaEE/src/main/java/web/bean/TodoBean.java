@@ -18,6 +18,8 @@ public class TodoBean {
 	TodoService todoService;
 
 	private Todo todo;
+	
+	private String titleKey;
 
 	public TodoBean() {
 	}
@@ -31,6 +33,10 @@ public class TodoBean {
 		return todoService.getAllTodos();
 	}
 
+	public String findTodoByTitle(){
+		return todoService.findTodoByTitle(titleKey);
+	}
+	
 	public String persist() {
 		todoService.persistTodo(todo);
 		return "todos";
@@ -51,5 +57,14 @@ public class TodoBean {
 		this.todo = todo;
 	}
 
+	public String getTitleKey() {
+		return titleKey;
+	}
+
+	public void setTitleKey(String titleKey) {
+		this.titleKey = titleKey;
+	}
+
+	
 
 }
