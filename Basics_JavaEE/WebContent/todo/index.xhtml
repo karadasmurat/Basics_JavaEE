@@ -12,28 +12,32 @@
 
 		<ui:define name="contents">
 
-			<h:form>
+			<div class="container">
 
-				<ul>
-
-					<!-- h:commandLink> renders a HTML <a> element with an onclick script which submits a (hidden) POST form
+				<div class="page-header"><h3>Business Continuity</h3></div>
+				
+				<h:form>
+					<ul>
+						<!-- h:commandLink> renders a HTML <a> element with an onclick script which submits a (hidden) POST form
 				 and can invoke a managed bean action method. 
 				 It's also required to be placed inside a <h:form>. 
 				 -->
-					<li><h:commandLink type="submit" value="Create New Todo"
-							action="create" /></li>
-					<li><h:commandLink type="submit" value="Show All Todos"
-							action="todos" /></li>
+						<li><h:commandLink type="submit" value="Create New Todo"
+								action="create" /></li>
+						<li><h:commandLink type="submit" value="Show All Todos"
+								action="todos" /></li>
 
-					<!-- 
+						<!-- 
 				h:outputLink renders a fullworthy HTML <a> element with the proper URL in the href attribute 
 				which fires a bookmarkable GET request. It cannot directly invoke a managed bean action method. 
 				-->
-					<li><h:outputLink value="todos.xhtml">Show All Todos</h:outputLink></li>
+						<li><h:outputLink value="todos.xhtml">Show All Todos</h:outputLink></li>
 
-				</ul>
+					</ul>
 
-			</h:form>
+				</h:form>
+				
+			</div>
 		</ui:define>
 
 	</ui:composition>

@@ -29,9 +29,7 @@
 
 			<h:panelGroup layout="block" styleClass="container">
 
-				<h:panelGroup layout="block" styleClass="jumbotron">
-					<h1>Todo Create</h1>
-				</h:panelGroup>
+				<div class="page-header"><h3>Create Todo</h3></div>
 
 				<h:form id="create">
 
@@ -49,14 +47,14 @@
 					<h:panelGroup layout="block" styleClass="form-group">
 						<h:outputLabel value="Todo Description" for="description" />
 						<h:inputText id="description" value="#{todoBean.todo.description}"
-							size="15" required="true" p:placeholder="&#xf002; Description"
+							size="15" required="true" p:placeholder="&#xF044; Description"
 							styleClass="FA form-control">
 							<f:validateLength minimum="2" maximum="250" />
 						</h:inputText>
 						<h:message for="description" style="color:red" />
 					</h:panelGroup>
 
-					<h:commandButton type="submit" id="create" value="&#xf0c7; Create"
+					<h:commandButton type="submit" id="create" value="&#xf0c7;  Save"
 						action="#{todoBean.persist}" styleClass="FA btn btn-danger" />
 				</h:form>
 
