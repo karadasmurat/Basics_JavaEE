@@ -6,6 +6,22 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
 	<title>Insert title here</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="../resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
+
+	<script src="../resources/css/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet"
+		href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+
+	<link rel="stylesheet"
+		href="../resources/css/footer-distributed-with-address-and-phones.css" />
+
+	<link href="http://fonts.googleapis.com/css?family=Cookie"
+		rel="stylesheet" type="text/css" />
+
 </h:head>
 <h:body>
 	<ui:composition>
@@ -23,19 +39,27 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><h:link outcome="index">
-								<span class="glyphicon glyphicon-home"></span> Home</h:link></li>
-						<li class="active"><h:link outcome="create">
-								<span class="glyphicon glyphicon-plus"></span> Create</h:link></li>
-						<li><a href="#contact">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
+						<li class="active">
+							<a href="#{request.contextPath}/todo/index.xhtml">
+								<span class="glyphicon glyphicon-home"></span> Home
+							</a>
+						</li>
+						<li>
+							<a href="#{request.contextPath}/todo/create.xhtml">
+								<span class="glyphicon glyphicon-plus"></span> Create
+							</a>
+						</li>
+						<li>
+							<a href="#contact">Contact</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administration
 								<span class="caret"></span>
-						</a>
+							</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
+								<li><a href="#{request.contextPath}/user/create.xhtml"><span class="glyphicon glyphicon-plus-sign"></span> Create User</a></li>
 								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
+								<li><h:link value="Home" outcome="index" /></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Nav header</li>
 								<li><a href="#">Separated link</a></li>
@@ -44,21 +68,24 @@
 					</ul>
 
 
-
 					<ul class="nav navbar-nav navbar-right">
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-expanded="false"> <span
 								class="glyphicon glyphicon-user"></span> Signed in as MK <span
 								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-cog"
+										aria-hidden="true"></span> Settings</a></li>
 								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
+								<li><a href="#">Another action</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
+								<li><a href="#"><span
+										class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+										Logout</a></li>
 							</ul></li>
-						<li><p class="navbar-text">Some Text</p></li>
+
 					</ul>
 
 				</div>
