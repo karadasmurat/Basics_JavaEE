@@ -57,8 +57,10 @@
 		</form-login-config>
 	</login-config>
 
+	<!-- primefaces 
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>cruze</param-value>
 	</context-param>
+	-->
 </web-app>
