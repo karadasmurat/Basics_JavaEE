@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Stateless;
 import javax.mail.Message;
@@ -18,6 +19,7 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class MailService {
 
+	@Resource(name = "java:jboss/mail/Gmail")
 	private Session session;
 	private static final Logger LOGGER = Logger.getLogger(MailService.class.getName());
 
@@ -25,7 +27,9 @@ public class MailService {
 	}
 
 	public Future sendMessage(String recipient_TO) {
+		
 		LOGGER.log(Level.FINE, "MailService.sendMessage()");
+		
 		String status;
 		try {
 			Message message = new MimeMessage(session);

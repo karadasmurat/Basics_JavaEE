@@ -4,7 +4,14 @@ public enum Status {
 
     SUBMITTED("submittedBundleKey"),
     REJECTED("rejectedBundleKey"),
-    APPROVED("approvedBundleKey");
+    APPROVED("approvedBundleKey"),
+    
+	NOTSTARTED("Not started"),
+	INPROGRESS("In progress"),
+	COMPLETED("Completed"),
+    
+    LOCKED("Account Locked"),
+    ACTIVE("Active");
 
     private String desc;
 

@@ -3,8 +3,12 @@ package ejb;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -17,24 +21,19 @@ import entity.User;
 
 @Stateless
 public class UserServiceImpl implements UserService {
+	
+	private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
 
-	private Configuration configuration;
-	private SessionFactory sessionFactory;
+	@PersistenceContext(unitName = "Basics_JavaEE_PU")
+	EntityManager em;
 
-	public UserServiceImpl() {
-		configuration = (new Configuration()).configure();
-		StandardServiceRegistryBuilder builder = (new StandardServiceRegistryBuilder()).applySettings(configuration
-				.getProperties());
-		sessionFactory = configuration.buildSessionFactory(builder.build());
+	public UserServiceImpl() {		
+		LOGGER.log(Level.FINE, "MK: Constructing UserServiceImpl ");
 	}
 
 	@Override
-	public void persistUser(User user) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(user);
-		session.getTransaction().commit();
-		session.close();
+	public void persistUser(User user) {		
+		em.persist(user);
 	}
 	
 	@Override

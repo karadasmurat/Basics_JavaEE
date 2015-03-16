@@ -1,12 +1,19 @@
 package entity;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="USERS")
@@ -35,8 +42,23 @@ public class User {
 
 
     private String salt;
+    
+	@CreationTimestamp
+	@Column(name = "CREATION_DATE", updatable = false)
+	private Calendar creationDate;
+
+	@UpdateTimestamp
+	@Column(name = "UPDATE_DATE")
+	private Calendar updateDate;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	
+	@Version
+	private long version;
 
 	public User() {
+		this.status = Status.ACTIVE;
 	}
 
 	public long getId() {
@@ -101,6 +123,39 @@ public class User {
 
 	public void setLoginAttempts(String loginAttempts) {
 		this.loginAttempts = loginAttempts;
+	}
+
+	public Calendar getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Calendar creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Calendar getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Calendar updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 	
 	
