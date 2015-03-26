@@ -33,13 +33,16 @@
 		<property name="hbm2ddl.auto">update</property>
 		
 		<!-- <mapping resource="com/ranga/mapping/Employee.hbm.xml" />-->
+
+		<!-- 		
 		<mapping class="entity.Person"/>
 		<mapping class="entity.Cart"/>
 		<mapping class="entity.Item"/>
 		<mapping class="entity.Todo"/>
 		<mapping class="entity.Employee"/>
 		<mapping class="entity.Certificate"/>
-		<mapping class="entity.User"/>
+		<mapping class="entity.User"/> 
+		-->
 		
 	</session-factory>
 	

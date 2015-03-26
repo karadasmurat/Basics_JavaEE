@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>LIST</title>
+
+</h:head>
+
+<h:body>
+
+
+	<h:panelGroup layout="block" styleClass="container">
+
+		<div class="page-header">
+			<h3>Selection</h3>
+		</div>
+
+		<h:form id="create">
+
+			<div class="form-group">
+				<h:outputLabel for="roleCbox" value="Select Car(s)" />
+				<h:selectManyCheckbox value="#{carBean.selectedCars}" converter="#{carConverter}" id="roleCbox">
+					<f:selectItems value="#{carBean.allCars}" var="car" itemValue="#{car}" itemLabel="#{car.brand}" />
+				</h:selectManyCheckbox>
+				<h:message for="roleCbox" style="color:red" />
+			</div>
+
+
+			<!-- h:commandButton outputs a <input type="submit"> -->
+			<h:commandButton type="submit" value="Submit" action="selectionResults" styleClass="btn btn-danger pull-right" />
+		</h:form>
+
+	</h:panelGroup>
+
+
+</h:body>
+
+</html>
