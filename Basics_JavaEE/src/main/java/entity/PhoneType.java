@@ -17,8 +17,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 
 @Entity
 @NamedQueries({ 
@@ -124,7 +126,5 @@ public class PhoneType implements Serializable {
 	public void setPhoneSubTypes(Set<PhoneSubType> phoneSubTypes) {
 		this.phoneSubTypes = phoneSubTypes;
 	}	
-	
-	
 
 }

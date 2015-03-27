@@ -13,8 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 
 @Entity
 @NamedQueries({
@@ -33,6 +35,7 @@ public class PhoneSubType implements Serializable {
 
 	@ManyToMany( targetEntity = PhoneType.class, mappedBy = "phoneSubTypes" )
 	private Set<PhoneType> phoneTypes;
+
 
 	public PhoneSubType() {
 		super(); 

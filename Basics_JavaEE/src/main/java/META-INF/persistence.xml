@@ -9,19 +9,24 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:/OracleXeDS</jta-data-source>
 
+		<class>entity.Address</class>
 		<class>entity.Certificate</class>
+		<class>entity.City</class>
+		<class>entity.ContactInformation</class>
 		<class>entity.Employee</class>
 		<class>entity.LogRecord</class>
+		<class>entity.PhoneNumber</class>
+		<class>entity.PhoneSubType</class>
+		<class>entity.PhoneType</class>
 		<class>entity.Role</class>
 		<class>entity.RoleSet</class>
 		<class>entity.Todo</class>
 		<class>entity.User</class>
-		<class>entity.PhoneType</class>
-		<class>entity.PhoneSubType</class>
+		<class>entity.HumanResource</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 
 			<!-- Hibernate envers - Unlike in previous versions, you no longer need 
