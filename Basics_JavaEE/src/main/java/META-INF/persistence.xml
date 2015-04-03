@@ -14,6 +14,7 @@
 		<class>entity.City</class>
 		<class>entity.ContactInformation</class>
 		<class>entity.Employee</class>
+		<class>entity.HumanResource</class>
 		<class>entity.LogRecord</class>
 		<class>entity.PhoneNumber</class>
 		<class>entity.PhoneSubType</class>
@@ -22,7 +23,10 @@
 		<class>entity.RoleSet</class>
 		<class>entity.Todo</class>
 		<class>entity.User</class>
-		<class>entity.HumanResource</class>
+		<class>entity.questionnaire.Questionnaire</class>
+		<class>entity.questionnaire.Question</class>
+		<class>entity.questionnaire.Choice</class>
+		<class>entity.questionnaire.Answer</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
