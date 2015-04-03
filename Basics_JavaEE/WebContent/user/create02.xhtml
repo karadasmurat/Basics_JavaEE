@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>LIST</title>
+
+</h:head>
+
+<h:body>
+
+	<ui:composition template="../template/layoutSideNav.xhtml">
+
+		<ui:define name="contents">
+
+			<h:panelGroup layout="block" styleClass="container-fluid">
+
+				<div class="page-header">
+					<h3>Create User</h3>
+				</div>
+
+					<h:form id="create">
+
+						<div class="form-group">
+							<h:outputLabel for="username" value="#{bundle.username}" />
+							<h:inputText id="username" value="#{userBean.user.username}" size="15" required="true"
+								p:placeholder="&#xF007; username" styleClass="FA form-control">
+								<f:validateLength minimum="2" maximum="10" />
+							</h:inputText>
+							<h:message for="username" style="color:red" />
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="pwd" value="#{bundle.password}" />
+							<h:inputSecret id="pwd" value="#{userBean.user.rawPassword}" size="15" required="true"
+								p:placeholder="&#xF023; password" styleClass="FA form-control">
+								<f:validateLength minimum="2" maximum="30" />
+							</h:inputSecret>
+							<h:message for="pwd" style="color:red" />
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="firstname" value="#{bundle.name}" />
+							<h:inputText id="firstname" value="#{userBean.user.firstName}" size="15" required="true"
+								styleClass="FA form-control">
+								<f:validateLength minimum="2" maximum="20" />
+							</h:inputText>
+							<h:message for="firstname" style="color:red" />
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="lastname" value="#{bundle.surname}" />
+							<h:inputText id="lastname" value="#{userBean.user.lastName}" size="15" required="true"
+								styleClass="FA form-control">
+								<f:validateLength minimum="2" maximum="20" />
+							</h:inputText>
+							<h:message for="lastname" style="color:red" />
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="email" value="#{bundle.email}" />
+							<h:inputText id="email" value="#{userBean.user.email}" size="15" required="true" styleClass="FA form-control">
+								<f:validateLength minimum="3" maximum="50" />
+							</h:inputText>
+							<h:message for="email" style="color:red" />
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="roleCbox" value="#{bundle.role}" />
+							<h:selectManyCheckbox value="#{userBean.user.roles}" converter="#{roleConverter}" id="roleCbox">
+								<f:selectItems value="#{userBean.allRoles}" var="role" itemValue="#{role}" itemLabel="#{role.role}" />
+							</h:selectManyCheckbox>
+							<h:message for="roleCbox" style="color:red" />
+						</div>
+
+
+						<!-- h:commandButton outputs a <input type="submit"> -->
+						<h:commandButton type="submit" id="create" value="#{bundle.btn_create}" action="#{userBean.createUser}"
+							styleClass="btn btn-danger pull-right" />
+					</h:form>
+			</h:panelGroup>
+
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+
+</html>

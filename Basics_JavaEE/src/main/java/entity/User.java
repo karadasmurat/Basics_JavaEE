@@ -1,13 +1,17 @@
 package entity;
 
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -16,33 +20,36 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
 public class User {
 
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="ID")
-    private long id;
+	@GeneratedValue(generator = "UserIncrement")
+	@GenericGenerator(name = "UserIncrement", strategy = "increment")
+	@Column(name = "ID")
+	private long id;
 
-	@Column(name="USERNAME")
-    private String username;
+	@Column(name = "USERNAME")
+	private String username;
 
-	@Column(name="PASSWORD")
-    private String hashedPassword;
+	@Column(name = "PASSWORD")
+	private String hashedPassword;
 
-    @Column(name="RAWPASSWORD")
-    private String rawPassword;
-    
-    @Column(name="LOGINATTEMPTS")
-    private String loginAttempts;
+	@Column(name = "RAWPASSWORD")
+	private String rawPassword;
 
-    private String firstName;
-    private String lastName;
+	@Column(name = "LOGINATTEMPTS")
+	private String loginAttempts;
 
+	private String firstName;
+	private String lastName;
+	private String email;
 
-    private String salt;
-    
+	@OneToMany(targetEntity = Role.class, mappedBy = "user", cascade = CascadeType.PERSIST)
+	private Set<Role> roles;
+
+	private String salt;
+
 	@CreationTimestamp
 	@Column(name = "CREATION_DATE", updatable = false)
 	private Calendar creationDate;
@@ -50,15 +57,33 @@ public class User {
 	@UpdateTimestamp
 	@Column(name = "UPDATE_DATE")
 	private Calendar updateDate;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	
+
 	@Version
 	private long version;
 
 	public User() {
-		this.status = Status.ACTIVE;
+		this.roles = new HashSet<Role>(0);
+	}
+
+	public void addRole(Role role) {
+		role.setUser(this);
+		this.roles.add(role);
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+
+		for (Role r : roles) {
+			r.setUser(this);
+		}
+
+		this.roles = roles;
 	}
 
 	public long getId() {
@@ -141,7 +166,6 @@ public class User {
 		this.updateDate = updateDate;
 	}
 
-	
 	public Status getStatus() {
 		return status;
 	}
@@ -157,7 +181,13 @@ public class User {
 	public void setVersion(long version) {
 		this.version = version;
 	}
-	
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

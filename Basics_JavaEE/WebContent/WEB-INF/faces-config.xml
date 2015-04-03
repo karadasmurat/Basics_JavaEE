@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
-    
-    	<application>
-    	
-    	<!-- validation/conversion msg override -->
-    	<message-bundle>web.messages.CustomMessages</message-bundle>
-    	
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+  
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>MKLogin</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<!-- enable page redirection (?faces-redirect=true)-->
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<application>
+		<!-- <message-bundle>web.messages.CustomMessages</message-bundle> -->
 		<resource-bundle>
 			<base-name>web.messages.Messages</base-name>
 			<var>bundle</var>
 		</resource-bundle>
-
 		<locale-config>
 			<default-locale>en</default-locale>
 			<supported-locale>de</supported-locale>
 		</locale-config>
 	</application>
-
 </faces-config>

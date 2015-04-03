@@ -21,8 +21,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class Employee {
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(generator = "EmployeeIncrement")
+	@GenericGenerator(name = "EmployeeIncrement", strategy = "increment")
 	@Column(name = "ID")
 	private int id;
 

@@ -33,7 +33,7 @@ public class Address implements Serializable {
 	//unidirectional ManyToOne
 	@ManyToOne
 	@JoinColumn(name="CITYID")
-	private City city;
+	private City city; //TO ONE city (not a collection) (there is a column on the Many side TO ONE side)
 	
 	//bidirectional
 	@ManyToMany( targetEntity = ContactInformation.class, mappedBy = "addresses" )

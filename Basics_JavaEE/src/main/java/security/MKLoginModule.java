@@ -34,8 +34,8 @@ public class MKLoginModule extends DatabaseServerLoginModule {
 
 	/** Max allowed login attempts */
 	protected int maxRetries = 10;
-	
-	//Custom principal
+
+	// Custom principal
 	private MKPrincipal principal;
 
 	public void initialize(Subject subject, CallbackHandler callbackHandler, Map sharedState, Map options) {
@@ -55,33 +55,46 @@ public class MKLoginModule extends DatabaseServerLoginModule {
 		// _log.debug("LoginModule initialized");
 	}
 
+	@Override
 	public boolean login() throws LoginException {
 
 		LOGGER.log(Level.INFO, "MKLoginModule: login()");
 
-		boolean login = super.login();
+		boolean login = false;
 		
-        if (login) {
-            principal = new MKPrincipal(getUsername(), "MK!");
-            principal.setUser(getUserInfo());
-        }
+		try {
+
+			login = super.login();
+
+		} catch (LoginException le) {
+			
+			setCounter(1);
+			return false;
+		}
 
 		int loginAttempts = getCounter();
 		LOGGER.log(Level.INFO, "MKLoginModule: loginAttempts is" + loginAttempts);
 
 		if (loginAttempts > maxRetries) {
 			super.loginOk = false;
-			throw new FailedLoginException("Account Locked");
-		}		
+			throw new FailedLoginException("MK: Max retry attempts reached. Account Locked.");
+		}
+
+
+		if (login) {
+			principal = new MKPrincipal(getUsername(), "MK!");
+			principal.setUser(getUserInfo());
+			setCounter(0);
+		}
 
 		return true;
 
 	}
-	
-    @Override
-    protected Principal getIdentity() {
-        return principal != null ? principal : super.getIdentity();
-    }
+
+	@Override
+	protected Principal getIdentity() {
+		return principal != null ? principal : super.getIdentity();
+	}
 
 	private int getCounter() {
 
@@ -125,7 +138,48 @@ public class MKLoginModule extends DatabaseServerLoginModule {
 			}
 		}
 	}
-	
+
+	// reset =0, increment=1
+	private boolean setCounter(int type) {
+
+		String val = "0";
+
+		if (type == 1) {
+			val = "LOGINATTEMPTS+1";
+		}
+
+		String username = super.getUsername();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+
+			InitialContext ic = new InitialContext();
+			DataSource ds = (DataSource) ic.lookup(dsJndiName);
+			con = ds.getConnection();
+			ps = con.prepareStatement("UPDATE USERS SET LOGINATTEMPTS=" + val + " WHERE USERNAME=?");
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			return true;
+
+		} catch (Exception e) {
+			// _log.error("Unexpected error", e);
+			// return Integer.MAX_VALUE;
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (Throwable e) {
+				// _log.error("Error closing connection", e);
+			}
+		}
+
+		return false;
+	}
+
 	private User getUserInfo() {
 
 		LOGGER.log(Level.INFO, "MKLoginModule: getUserInfo()");
@@ -145,21 +199,21 @@ public class MKLoginModule extends DatabaseServerLoginModule {
 			ps = con.prepareStatement("SELECT * FROM USERS WHERE USERNAME=?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
-				
-	            String firstName = rs.getString("FIRSTNAME");
-	            String lastName = rs.getString("LASTNAME");
-	            
-	            User user = new User();
-	            user.setFirstName(firstName);
-	            user.setLastName(lastName);
-	            
+
+				String firstName = rs.getString("FIRSTNAME");
+				String lastName = rs.getString("LASTNAME");
+
+				User user = new User();
+				user.setFirstName(firstName);
+				user.setLastName(lastName);
+
 				LOGGER.log(Level.INFO, "MK getUserInfo() lastName: " + lastName);
-				
+
 				return user;
-			} 
-			
+			}
+
 		} catch (Exception e) {
 			// _log.error("Unexpected error", e);
 			return null;
@@ -172,8 +226,8 @@ public class MKLoginModule extends DatabaseServerLoginModule {
 				// _log.error("Error closing connection", e);
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 }

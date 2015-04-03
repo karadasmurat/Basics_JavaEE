@@ -17,8 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class Certificate {
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(generator = "CertificateIncrement")
+	@GenericGenerator(name = "CertificateIncrement", strategy = "increment")
 	@Column(name = "ID")
 	private int id;
 

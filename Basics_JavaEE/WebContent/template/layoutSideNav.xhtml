@@ -20,6 +20,9 @@
 
 	<link rel="stylesheet" href="../resources/css/footer-distributed-with-address-and-phones.css" />
 
+	<link rel="stylesheet" type="text/css" href="../resources/css/navside.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/nav.css" />
+
 
 	<!-- GOOGLE FONTS-->
 	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css" />
@@ -34,11 +37,16 @@ body {
 .FA {
 	font-family: FontAwesome;
 }
+
+#leftNAV.affix {
+	top: 60px; /* Set the top position of pinned element */
+}
 </style>
 
 
 </h:head>
-<h:body>
+<body data-spy="scroll" data-target="#myScrollspy">
+
 
 	<!-- If the layout attribute has the value block then it will be rendered as a div -->
 	<h:panelGroup layout="block" id="header">
@@ -48,12 +56,34 @@ body {
 		</ui:insert>
 	</h:panelGroup>
 
-	<h:panelGroup layout="block" id="contents">
-		<ui:insert name="contents">
-			<ui:include src="contents.xhtml">
-			</ui:include>
-		</ui:insert>
-	</h:panelGroup>
+	<div class="container-fluid">
+
+		<div class="row no-gutter">
+
+			<div class="col-md-2 nopadding">
+
+				<h:panelGroup layout="block" id="navside" styleClass="nopadding">
+
+					<ui:insert name="navside">
+						<ui:include src="navside.xhtml">
+						</ui:include>
+					</ui:insert>
+
+				</h:panelGroup>
+
+			</div>
+			<div class="col-md-10 nopadding">
+
+				<h:panelGroup layout="block" id="contents">
+					<ui:insert name="contents">
+						<ui:include src="contents.xhtml">
+						</ui:include>
+					</ui:insert>
+				</h:panelGroup>
+
+			</div>
+		</div>
+	</div>
 
 	<h:panelGroup layout="block" id="footer">
 		<ui:insert name="footer">
@@ -62,5 +92,5 @@ body {
 		</ui:insert>
 	</h:panelGroup>
 
-</h:body>
+</body>
 </html>

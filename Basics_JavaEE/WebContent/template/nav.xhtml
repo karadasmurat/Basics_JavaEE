@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
 	<title>Insert title here</title>
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-		href="../resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
 
 	<script src="../resources/css/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet"
-		href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
 
-	<link rel="stylesheet"
-		href="../resources/css/footer-distributed-with-address-and-phones.css" />
+	<link rel="stylesheet" href="../resources/css/footer-distributed-with-address-and-phones.css" />
 
-	<link href="http://fonts.googleapis.com/css?family=Cookie"
-		rel="stylesheet" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css" />
 
 </h:head>
 <h:body>
@@ -28,32 +22,28 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+						aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="#">BCM</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a
-							href="#{request.contextPath}/todo/index.xhtml"> <span
+						<li class="active"><a href="#{request.contextPath}/todo/index.xhtml"> <span
 								class="glyphicon glyphicon-home"></span> Home
 						</a></li>
-						<li><a href="#{request.contextPath}/todo/create.xhtml"> <span
-								class="glyphicon glyphicon-plus"></span> Create
+						<li><a href="#{request.contextPath}/todo/create.xhtml"> <span class="glyphicon glyphicon-plus"></span>
+								Create
 						</a></li>
 						<li><a href="#contact">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Administration
-								<span class="caret"></span>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-expanded="false">Administration <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#{request.contextPath}/user/create.xhtml"><span
-										class="glyphicon glyphicon-plus-sign"></span> Create User</a></li>
+								<li><a href="#{request.contextPath}/user/create.xhtml"><span class="glyphicon glyphicon-plus-sign"></span>
+										Create User</a></li>
 								<li><a href="#">Another action</a></li>
 								<li><h:link value="Home" outcome="index" /></li>
 								<li class="divider"></li>
@@ -63,26 +53,25 @@
 							</ul></li>
 					</ul>
 
+					<h:form>
+						<ul class="nav navbar-nav navbar-right">
 
-					<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Signed in as
+									#{navBean.mkPrincipal.user.lastName} <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+									<li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i>Tasks</a></li>
+									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Messages</a></li>
+									<li class="divider"></li>
+									<li><h:commandLink action="#{navBean.logout}">
+											<i class="fa fa-power-off" aria-hidden="true"></i> Logout
+										</h:commandLink></li>
+								</ul></li>
 
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false"> <span
-								class="glyphicon glyphicon-user"></span> Signed in as
-								#{navBean.mkPrincipal.user.lastName} <span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#"><span class="glyphicon glyphicon-cog"
-										aria-hidden="true"></span> Settings</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><span
-										class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-										Logout</a></li>
-							</ul></li>
-
-					</ul>
+						</ul>
+					</h:form>
 
 				</div>
 				<!--/.nav-collapse -->

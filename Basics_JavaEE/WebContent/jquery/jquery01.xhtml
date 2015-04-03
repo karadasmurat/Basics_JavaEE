@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+	<title>JQuery</title>
+
+	<link rel="stylesheet" href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
+	
+	<style type="text/css">
+ul {
+	margin-left: 20px;
+	color: blue;
+}
+
+li {
+	cursor: default;
+}
+
+.strong {
+	font-weight: bold;
+	color: orange;
+}
+
+.normal {
+	font-weight: normal;
+	color: black;
+}
+</style>
+
+</h:head>
+<h:body>
+
+	<ul>
+		<li class="myClass"><a href="http://www.google.com?q=milk">Milk</a></li>
+		<li><a href="http://www.google.com?q=egg">Egg</a></li>
+		<li>Bread</li>
+		<li class="fade">Chips</li>
+		<li class="fade">Socks</li>
+	</ul>
+
+	<ul class="myList">
+		<li><a href="http://www.google.com?q=milk">Apple</a></li>
+		<li><a href="http://www.google.com?q=egg">Banana</a></li>
+		<li>Orange</li>
+	</ul>
+
+
+	<button class='alert'>Alert!</button>
+
+	<br />
+	<p id="myP" style="border: 1px;">This is a paragraph.</p>
+
+	<button class="btn1">Hide</button>
+	<button class="btn2">Show</button>
+	<button id="toggleIt">
+		Toggle <i class="fa fa-angle-double-up"></i>
+	</button>
+	<br />
+
+	<button id="fadeOut">FadeOut</button>
+	<button id="fadeIn">FadeIn</button>
+
+
+
+	<script>
+
+$(document).ready(function(){
+
+	//W3C standard addEventListener, has compatibility issues.
+	$("button.alert").on("click", function(){
+		alert("Cool.")
+		console.log("alert button pressed.")});
+
+	$( "li" ).hover(
+			function() {$( this ).append( $( "<span> ***</span>" ) ); }, 
+			function() {$( this ).find( "span:last" ).remove();	}
+	);
+
+	$( "li.fade" ).hover(function() {
+		$( this ).toggleClass("strong");
+	});
+
+
+
+	// Attach a directly bound event handler
+	// Direct events are only attached to elements at the time the .on() method is called
+	$( "li.myClass a" ).on( "click", function( event ) {
+		event.preventDefault();
+		console.log( $( this ).text() );
+	});
+
+	// Attach a delegated event handler
+	// Moved the a part from the selector to the second parameter
+	// Selector parameter tells the handler to listen for the specified event, 
+	// and when it hears it, check to see if the triggering element for that event matches.
+	$( "ul.myList" ).on( "click", "a", function( event ) {
+		event.preventDefault();
+		console.log( $( this ).text() );
+	});
+
+
+	$(".btn1").on("click", function(e){
+		 $("#myP").hide(500);
+	});
+
+	$(".btn2").on("click", function(e){
+		$("#myP").show(500);
+	});
+
+	$("#fadeOut").on("click", function(e){
+		$("#myP").fadeOut(500);
+	});
+
+	$("#fadeIn").on("click", function(e){
+		$("#myP").fadeIn(500);
+	});
+
+
+	
+	$("#toggleIt").on("click", function(e){
+		
+		//Doing Something After an Animation Completes
+		//To defer an action until after an animation has run to completion, use an animation callback function
+		//	
+		$("#myP").toggle(500, function(){
+			$("#toggleIt i").toggleClass("fa-angle-double-down");
+		});
+	});
+	
+}); 
+
+</script>
+</h:body>
+</html>
