@@ -5,11 +5,11 @@ import java.util.Set;
 
 import javax.ejb.Local;
 
-import entity.PhoneSubType;
-import entity.PhoneType;
 import entity.Role;
 import entity.RoleSet;
 import entity.User;
+import entity.contactinfo.PhoneSubType;
+import entity.contactinfo.PhoneType;
 
 @Local
 public interface UserService {

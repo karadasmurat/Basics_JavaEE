@@ -14,56 +14,201 @@
 
 		<ui:define name="contents">
 
-			<h:panelGroup layout="block" styleClass="container-fluid">
-				<h:form>
+			<h:panelGroup layout="block" styleClass="container-fluid col-md-8 col-md-offset-2">
 
-					<h:messages />
+				<h:form styleClass="form-horizontal">
 
-					<div class="form-group">
-						<h:outputLabel value="Employee ID" />
-						<h:inputText value="#{hrBean.humanResource.employeeId}" size="15" p:placeholder="&#xF007; employee id"
-							styleClass="FA form-control">
+					<fieldset>
 
-						</h:inputText>
-					</div>
+						<!-- Form Name -->
+						<legend>Create Human Resource</legend>
 
-					<div class="form-group">
-						<h:outputLabel value="Lastname" />
-						<h:inputText value="#{hrBean.humanResource.lastName}" size="15" p:placeholder="&#xF007; employee id"
-							styleClass="FA form-control">
-
-						</h:inputText>
-					</div>
-
-					<br />
-					<h:outputLabel value="Address:" />
-					<hr />
-
-					<ui:repeat value="#{hrBean.humanResource.contactInfo.addresses}" varStatus="addrLoop">
-						<div class="form-group">
-							<h:outputLabel value="Title:" />
-							<h:inputText value="#{hrBean.humanResource.contactInfo.addresses[addrLoop.index].title}" size="15"
-								p:placeholder="&#xF007; title" styleClass="FA form-control">
-
-							</h:inputText>
+						<div class="form-group has-feedback">
+							<h:outputLabel value="Employee ID" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText id="empID" value="#{hrBean.humanResource.employeeId}" styleClass="form-control" />
+								<span class="glyphicon glyphicon-user form-control-feedback"></span>
+							</div>
+							<h:message id="m1" for="empID" style="color:red" />
 						</div>
+
 						<div class="form-group">
-							<h:outputLabel value="Address:" />
-							<h:inputText value="#{hrBean.humanResource.contactInfo.addresses[addrLoop.index].address}" size="15"
-								p:placeholder="&#xF007; address" styleClass="FA form-control">
 
-							</h:inputText>
+							<h:outputLabel value="Name" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText id="fname" value="#{hrBean.humanResource.firstName}" styleClass="form-control" required="true">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
+								<h:message id="m2" for="fname" errorClass="label label-danger" />
+							</div>
 						</div>
-						<hr />
-					</ui:repeat>
+						
+						<div class="form-group">
+							<h:outputLabel value="Surname" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText id="lname" value="#{hrBean.humanResource.lastName}" styleClass="form-control" required="true">
+									<f:validateLength minimum="2" maximum="50" />
+								</h:inputText>
+								<h:message id="m3" for="lname" errorClass="label label-danger" />
+							</div>
+						</div>
 
-					<!-- h:commandButton outputs a <input type="submit"> -->
-					<h:commandButton type="submit" id="add" value="Add another Address " action="#{hrBean.addAddress()}"
-						styleClass="btn btn-danger pull-right" />
 
-					<h:commandButton type="submit" id="create" value="Save" action="#{hrBean.createHR}"
-						styleClass="btn btn-danger pull-right" />
+						<div class="form-group has-feedback">
+							<h:outputLabel value="E-mail" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText value="#{hrBean.humanResource.primaryEmail}" p:placeholder="@avea.com.tr" styleClass="form-control" />
+								<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+							</div>
+						</div>
 
+						<div class="form-group has-feedback">
+							<h:outputLabel value="Secondary E-mail" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText value="#{hrBean.humanResource.secondaryEmail}" styleClass="form-control" />
+								<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Title" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText value="#{hrBean.humanResource.title}" size="15" p:placeholder="&#xF007;"
+									styleClass="FA form-control">
+
+								</h:inputText>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Group" styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:inputText value="#{hrBean.humanResource.groupName}" size="15" p:placeholder="&#xF007;"
+									styleClass="FA form-control">
+
+								</h:inputText>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel for="companyMenu" value="Company: " styleClass="control-label col-xs-2" />
+							<div class="col-xs-10">
+								<h:selectOneMenu id="companyMenu" value="#{hrBean.humanResource.company}" converter="#{companyConverter}"
+									styleClass="form-control">
+									<f:selectItems value="#{hrBean.allCompanies}" var="comp" itemLabel="#{comp.name}" itemValue="#{comp}" />
+								</h:selectOneMenu>
+							</div>
+							<h:message for="companyMenu" style="color:red" />
+						</div>
+
+						<br />
+
+						<h:panelGroup id="addrDIV" layout="block">
+
+							<h:outputText value="Address:" />
+							<hr />
+
+							<ui:repeat value="#{hrBean.humanResource.contactInfo.addresses}" var="addr">
+								<div class="form-group">
+									<h:outputLabel value="Title:" styleClass="control-label col-xs-2" />
+									<div class="col-xs-10">
+										<h:inputText value="#{addr.title}" size="15" p:placeholder="&#xF007; title" styleClass="FA form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Address:" styleClass="control-label col-xs-2" />
+									<div class="col-xs-10">
+										<h:inputText value="#{addr.address}" size="15" p:placeholder="&#xF007; address" styleClass="FA form-control" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel value="City: " styleClass="control-label col-xs-2" />
+									<div class="col-xs-10">
+										<h:selectOneMenu value="#{addr.city}" converter="#{cityConverter}" styleClass="form-control">
+											<f:selectItems value="#{hrBean.allCities}" var="cty" itemLabel="#{cty.name}" itemValue="#{cty}" />
+										</h:selectOneMenu>
+									</div>
+								</div>
+
+								<hr />
+							</ui:repeat>
+
+						</h:panelGroup>
+
+
+						<!-- h:commandButton outputs a <input type="submit"> -->
+						<h:commandButton type="submit" id="addAddr" value="Add Another Address To This Resource"
+							action="#{hrBean.addAddress()}" styleClass="btn btn-default pull-right">
+							<f:ajax execute="@form" render="addrDIV" />
+
+						</h:commandButton>
+						<br />
+
+						<h:panelGroup id="phoneDIV" layout="block">
+
+							<h:outputText value="Phone:" />
+							<hr />
+
+							<ui:repeat value="#{hrBean.humanResource.contactInfo.phoneNumbers}" var="pn">
+
+								<div class="row">
+
+									<div class="col-xs-6">
+										<div class="form-group">
+											<h:outputLabel for="typeMenu" value="Phone Type: " styleClass="control-label col-xs-4" />
+											<div class="col-xs-8">
+												<h:selectOneMenu value="#{pn.phoneType}" converter="#{phoneTypeConverter}" styleClass="form-control">
+													<f:selectItem itemLabel="-- Select --" itemValue="#{null}" />
+													<f:selectItems value="#{hrBean.allPhoneTypes}" var="pt" itemLabel="#{pt.title}" itemValue="#{pt}" />
+													<f:ajax listener="#{hrBean.processValueChange}" execute="@form" render="@form" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-6">
+										<div class="form-group">
+											<h:outputLabel value="Sub-Type: " styleClass="control-label col-xs-4" />
+											<div class="col-xs-8">
+												<h:selectOneMenu value="#{pn.phoneSubType}" converter="#{phoneSubTypeConverter}" styleClass="form-control">
+													<f:selectItems value="#{hrBean.allPhoneSubTypes}" var="pst" itemLabel="#{pst.title}" itemValue="#{pst}" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+									</div>
+									<!-- row -->
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel value="Title:" styleClass="control-label col-xs-2" />
+									<div class="col-xs-10">
+										<h:inputText value="#{pn.title}" p:placeholder="&#xF007; title" styleClass="FA form-control" />
+									</div>
+								</div>
+								<div class="form-group has-feedback">
+									<h:outputLabel value="Phone:" styleClass="control-label col-xs-2" />
+									<div class="col-xs-10">
+										<h:inputText value="#{pn.phoneNumber}" styleClass="form-control" />
+										<span class="glyphicon glyphicon-earphone form-control-feedback"></span>
+									</div>
+								</div>
+
+								<hr />
+							</ui:repeat>
+
+						</h:panelGroup>
+
+						<!-- h:commandButton outputs a <input type="submit"> -->
+						<h:commandButton type="submit" id="addPhone" value="Add Another Phone To This Resource"
+							action="#{hrBean.addPhone()}" styleClass="btn btn-default pull-right">
+							<f:ajax execute="@form" render="phoneDIV" />
+
+						</h:commandButton>
+
+						<br />
+
+						<h:commandButton type="submit" id="create" value="Save" action="#{hrBean.createHR}" styleClass="btn btn-danger" />
+					</fieldset>
 				</h:form>
 			</h:panelGroup>
 		</ui:define>

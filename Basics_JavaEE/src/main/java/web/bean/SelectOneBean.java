@@ -14,8 +14,8 @@ import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 
 import ejb.UserService;
-import entity.PhoneSubType;
-import entity.PhoneType;
+import entity.contactinfo.PhoneSubType;
+import entity.contactinfo.PhoneType;
 
 @Named
 @SessionScoped

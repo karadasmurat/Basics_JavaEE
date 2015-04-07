@@ -17,11 +17,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import entity.PhoneSubType;
-import entity.PhoneType;
 import entity.Role;
 import entity.RoleSet;
 import entity.User;
+import entity.contactinfo.PhoneSubType;
+import entity.contactinfo.PhoneType;
 
 @Stateless
 public class UserServiceImpl implements UserService {

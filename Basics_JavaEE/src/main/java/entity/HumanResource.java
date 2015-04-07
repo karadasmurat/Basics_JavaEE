@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import entity.contactinfo.ContactInformation;
+
 /**
  * Entity implementation class for Entity: HumanResource
  *
@@ -33,11 +35,16 @@ public class HumanResource implements Serializable {
 	private String primaryEmail;
 	private String secondaryEmail;
 	private String title;
-	private String company;
+	
+	//bidirectional owning
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="COMPANY_ID")
+	private Company company;
+	
 	private String groupName;
 	
 	//unidirectional ManyToOne
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name="CONTACTINFO_ID")
 	private ContactInformation contactInfo;
 
@@ -60,11 +67,13 @@ public class HumanResource implements Serializable {
 	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
-	public String getCompany() {
+	public Company getCompany() {
 		return company;
 	}
-	public void setCompany(String company) {
+	public void setCompany(Company company) {
+		//bidirectional
 		this.company = company;
+		//company.getHumanResources().add(this);
 	}
 	public String getGroupName() {
 		return groupName;

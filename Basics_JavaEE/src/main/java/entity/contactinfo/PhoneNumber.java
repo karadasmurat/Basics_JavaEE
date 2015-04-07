@@ -1,11 +1,13 @@
-package entity;
+package entity.contactinfo;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,8 +45,13 @@ public class PhoneNumber implements Serializable {
 	private PhoneSubType phoneSubType;
 	
 	
-	@ManyToMany( targetEntity = ContactInformation.class, mappedBy = "phoneNumbers" )
-	private Set<ContactInformation> contactInformations;
+	//@ManyToMany( targetEntity = ContactInformation.class, mappedBy = "phoneNumbers" )
+	//private Set<ContactInformation> contactInformations;
+	
+	//bidirectional owning
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="CONTACTINFO_ID")
+	private ContactInformation contactInformation;
 	
 	
 	@CreationTimestamp
@@ -130,5 +137,15 @@ public class PhoneNumber implements Serializable {
 	public void setPhoneSubType(PhoneSubType phoneSubType) {
 		this.phoneSubType = phoneSubType;
 	}
+
+	public ContactInformation getContactInformation() {
+		return contactInformation;
+	}
+
+	public void setContactInformation(ContactInformation contactInformation) {
+		this.contactInformation = contactInformation;
+	}
+	
+	
 
 }

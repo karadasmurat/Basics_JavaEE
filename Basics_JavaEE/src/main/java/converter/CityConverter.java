@@ -1,31 +1,23 @@
 package converter;
 
-import java.io.Serializable;
-import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.inject.Named;
 
 import ejb.ResourceService;
-import ejb.UserService;
 import entity.contactinfo.City;
-import entity.contactinfo.PhoneSubType;
-import entity.contactinfo.PhoneType;
 
-@Named
-@SessionScoped
-public class PhoneSubTypeConverter implements Converter, Serializable {
-	
-	private static final long serialVersionUID = 1L;
+@ManagedBean
+@RequestScoped
+public class CityConverter implements Converter {
 
-	private static final Logger LOGGER = Logger.getLogger(PhoneSubTypeConverter.class.getName());
-	
+	private static final Logger LOGGER = Logger.getLogger(CityConverter.class.getName());
+
 	@EJB
 	private ResourceService resourceService;
 
@@ -38,9 +30,8 @@ public class PhoneSubTypeConverter implements Converter, Serializable {
 			return null;
 		}
 
-		Long pid = Long.valueOf(submittedValue);
-
-		return resourceService.findPhoneSubType(pid);
+		Long cid = Long.valueOf(submittedValue);
+		return resourceService.findCity(cid);
 
 	}
 
@@ -51,7 +42,7 @@ public class PhoneSubTypeConverter implements Converter, Serializable {
 			return "";
 		}
 
-		return String.valueOf(((PhoneSubType) modelValue).getId());
+		return String.valueOf(((City) modelValue).getId());
 	}
 
 }

@@ -9,16 +9,16 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:/OracleXeDS</jta-data-source>
 
-		<class>entity.Address</class>
+		<class>entity.contactinfo.Address</class>
 		<class>entity.Certificate</class>
-		<class>entity.City</class>
-		<class>entity.ContactInformation</class>
+		<class>entity.contactinfo.City</class>
+		<class>entity.contactinfo.ContactInformation</class>
 		<class>entity.Employee</class>
 		<class>entity.HumanResource</class>
 		<class>entity.LogRecord</class>
-		<class>entity.PhoneNumber</class>
-		<class>entity.PhoneSubType</class>
-		<class>entity.PhoneType</class>
+		<class>entity.contactinfo.PhoneNumber</class>
+		<class>entity.contactinfo.PhoneSubType</class>
+		<class>entity.contactinfo.PhoneType</class>
 		<class>entity.Role</class>
 		<class>entity.RoleSet</class>
 		<class>entity.Todo</class>
@@ -27,6 +27,7 @@
 		<class>entity.questionnaire.Question</class>
 		<class>entity.questionnaire.Choice</class>
 		<class>entity.questionnaire.Answer</class>
+		<class>entity.Company</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />

@@ -1,11 +1,13 @@
-package entity;
+package entity.contactinfo;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,12 +34,13 @@ public class Address implements Serializable {
 	
 	//unidirectional ManyToOne
 	@ManyToOne
-	@JoinColumn(name="CITYID")
+	@JoinColumn(name="CITY_ID")
 	private City city; //TO ONE city (not a collection) (there is a column on the Many side TO ONE side)
 	
-	//bidirectional
-	@ManyToMany( targetEntity = ContactInformation.class, mappedBy = "addresses" )
-	private Set<ContactInformation> contactInformations;
+	//bidirectional owning
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="CONTACTINFO_ID")
+	private ContactInformation contactInformation;
 	
 	
 	@CreationTimestamp
@@ -127,6 +130,15 @@ public class Address implements Serializable {
 
 	public void setPostCode(Integer postCode) {
 		this.postCode = postCode;
+	}
+
+	public ContactInformation getContactInformation() {
+		return contactInformation;
+	}
+
+	public void setContactInformation(ContactInformation contactInformation) {
+		this.contactInformation = contactInformation;
+		
 	}
 	
 	

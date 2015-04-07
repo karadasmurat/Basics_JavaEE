@@ -1,4 +1,4 @@
-package entity;
+package entity.contactinfo;
 
 import java.io.Serializable;
 import java.util.Set;

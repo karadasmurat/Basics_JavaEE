@@ -1,30 +1,35 @@
-package entity;
+package entity.contactinfo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name="City.findAll", query="SELECT c FROM City c")
+})
 public class City {
 	
 	@Id //no generator
-	private String id;
+	private long id;
 	private String name;
 	
 	public City() {
 		super();
 	}
 	
-	public City(String id, String name) {
+	public City(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -47,6 +52,10 @@ public class City {
 		}
 
 		City obj2 = (City) obj;
+		
+		if (getName() == null || obj2.getName() == null) {
+			return false;
+		}
 
 		return getName().equals(obj2.getName());
 	}

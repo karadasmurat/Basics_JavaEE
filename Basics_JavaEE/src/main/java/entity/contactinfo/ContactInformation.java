@@ -1,10 +1,9 @@
-package entity;
+package entity.contactinfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,14 +33,10 @@ public class ContactInformation implements Serializable {
 	private String title;
 	private String description;
 	
-	//The owning side
-	@ManyToMany(fetch=FetchType.EAGER, targetEntity = Address.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "CONTACTINFO_ADDRESS", joinColumns = { @JoinColumn(name = "CONTACTINFO_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID") })
+	@OneToMany(fetch=FetchType.EAGER, targetEntity = Address.class, mappedBy="contactInformation", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Address> addresses;
 	
-	//The owning side
-	@ManyToMany(fetch=FetchType.EAGER, targetEntity = PhoneNumber.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "CONTACTINFO_PHONENUMBER", joinColumns = { @JoinColumn(name = "CONTACTINFO_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "PHONENUMBER_ID", referencedColumnName = "ID") })
+	@OneToMany(fetch=FetchType.EAGER, targetEntity = PhoneNumber.class, mappedBy="contactInformation", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<PhoneNumber> phoneNumbers;
 	
 	@CreationTimestamp
@@ -61,9 +57,23 @@ public class ContactInformation implements Serializable {
 		phoneNumbers = new ArrayList<PhoneNumber>(1);
 		addresses = new ArrayList<Address>(1);
 		
-		this.addresses.add(new Address("CI Constructor"));
-		this.phoneNumbers.add(new PhoneNumber());
+		//bidirectional addToList
+		this.addAddress(new Address());
+		this.addPhoneNumber(new PhoneNumber());
 	}
+	
+	public void addAddress(Address addr){
+		//bidirectional addToList
+		addr.setContactInformation(this);
+		addresses.add(addr);
+	}
+	
+	public void addPhoneNumber(PhoneNumber p){
+		//bidirectional addToList
+		p.setContactInformation(this);
+		this.phoneNumbers.add(p);
+	}
+	
 
 	public long getId() {
 		return id;

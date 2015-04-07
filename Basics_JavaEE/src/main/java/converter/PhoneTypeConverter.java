@@ -12,56 +12,46 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
+import ejb.ResourceService;
 import ejb.UserService;
-import entity.PhoneSubType;
-import entity.PhoneType;
+import entity.contactinfo.City;
+import entity.contactinfo.PhoneSubType;
+import entity.contactinfo.PhoneType;
 
 @Named
 @SessionScoped
 public class PhoneTypeConverter implements Converter, Serializable {
 	
-	@EJB
-	private UserService userService;
-	
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger LOGGER = Logger.getLogger(PhoneTypeConverter.class.getName());
+	
+	@EJB
+	private ResourceService resourceService;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
-		
+
+		// Called when HTTP request parameter is to be converted to item value.
+
 		if (submittedValue == null || submittedValue.isEmpty()) {
 			return null;
 		}
 
-		
-		LOGGER.log(Level.FINE, "MK: Converting submittedValue to PhoneType: " + submittedValue);
-		
-		PhoneType pt = userService.findPhoneTypeByTitle(submittedValue);
-		
-		LOGGER.log(Level.FINE, "MK: PhoneType Title: " + pt.getTitle());
-		Set<PhoneSubType> psts = pt.getPhoneSubTypes();
-		LOGGER.log(Level.FINE, "MK: PhoneType SubTypes of " + pt.getTitle() + ": ");
-		for(PhoneSubType var : psts){
-			LOGGER.log(Level.FINE, "MK: SubType: " + var.getTitle());
-		}
-		
-		LOGGER.log(Level.FINE, "MK: Converting submittedValue to PhoneType: " + submittedValue);
-		
-		return pt;
+		Long pid = Long.valueOf(submittedValue);
+
+		return resourceService.findPhoneType(pid);
+
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-		
+
 		if (modelValue == null) {
 			return "";
 		}
 
-		String title = ((PhoneType)modelValue).getTitle();
-		LOGGER.log(Level.FINE, "MK: Converting modelValue to String: " + title);
-		
-		
-		return title;
-		
+		return String.valueOf(((PhoneType) modelValue).getId());
 	}
 
 }

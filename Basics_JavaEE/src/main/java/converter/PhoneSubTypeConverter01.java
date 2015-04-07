@@ -1,7 +1,6 @@
 package converter;
 
 import java.io.Serializable;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,46 +11,43 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
-import ejb.ResourceService;
 import ejb.UserService;
-import entity.contactinfo.City;
 import entity.contactinfo.PhoneSubType;
-import entity.contactinfo.PhoneType;
 
 @Named
 @SessionScoped
-public class PhoneSubTypeConverter implements Converter, Serializable {
-	
-	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOGGER = Logger.getLogger(PhoneSubTypeConverter.class.getName());
+public class PhoneSubTypeConverter01 implements Converter, Serializable {
 	
 	@EJB
-	private ResourceService resourceService;
+	private UserService userService;
+	
+	private static final Logger LOGGER = Logger.getLogger(PhoneSubTypeConverter01.class.getName());
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
-
-		// Called when HTTP request parameter is to be converted to item value.
-
+		
 		if (submittedValue == null || submittedValue.isEmpty()) {
 			return null;
 		}
 
-		Long pid = Long.valueOf(submittedValue);
-
-		return resourceService.findPhoneSubType(pid);
-
+		LOGGER.log(Level.FINE, "MK: Converting submittedValue to PhoneSubType: " + submittedValue);
+		
+		return userService.findPhoneSubTypeByTitle(submittedValue);
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object modelValue) {
-
+		
 		if (modelValue == null) {
 			return "";
 		}
 
-		return String.valueOf(((PhoneSubType) modelValue).getId());
+		String title = ((PhoneSubType)modelValue).getTitle();
+		LOGGER.log(Level.FINE, "MK: Converting modelValue to String: " + title);
+		
+		
+		return title;
+		
 	}
 
 }

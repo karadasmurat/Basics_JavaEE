@@ -1,4 +1,4 @@
-package entity;
+package entity.contactinfo;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -39,6 +39,7 @@ public class PhoneType implements Serializable {
 	private String title;
 	private String description;
 	
+	//all possible subtypes
 	//The owning side
 	@ManyToMany(fetch=FetchType.EAGER, targetEntity = PhoneSubType.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "PHONETYPE_SUBTYPE", joinColumns = { @JoinColumn(name = "PHONETYPE_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "PHONESUBTYPE_ID", referencedColumnName = "ID") })
