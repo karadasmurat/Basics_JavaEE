@@ -14,7 +14,7 @@
 	</navigation-rule>
 
 	<application>
-		<!-- <message-bundle>web.messages.CustomMessages</message-bundle> -->
+		<message-bundle>web.messages.CustomMessages</message-bundle>
 		<resource-bundle>
 			<base-name>web.messages.Messages</base-name>
 			<var>bundle</var>

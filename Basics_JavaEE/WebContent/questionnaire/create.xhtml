@@ -55,17 +55,24 @@
 
 						<hr />
 
-						<ui:repeat value="#{qu.choices}" var="ch">
-							<div class="form-group">
-								<h:outputLabel value="Choice Text:" />
-								<h:inputText value="#{ch.text}" size="15" styleClass="form-control" />
-							</div>
+						<h:panelGroup id="choiceDIV">
 
-						</ui:repeat>
+							<ui:repeat value="#{qu.choices}" var="ch">
+								<div class="form-group">
+									<h:outputLabel value="Choice Text:" />
+									<h:inputText value="#{ch.text}" size="15" styleClass="form-control" />
+								</div>
 
-						<h:commandButton type="submit" id="addChoice" value="Add Choice To This Question"
-							action="#{qu.addDummyChoice()}"
-							styleClass="btn btn-default pull-right" />
+							</ui:repeat>
+
+							<h:commandButton type="submit" id="addChoice" value="Add Choice To This Question" action="#{qu.addDummyChoice()}"
+								styleClass="btn btn-default pull-right">
+								<f:ajax execute="@form" render="choiceDIV" />
+
+							</h:commandButton>
+							
+						</h:panelGroup>
+						
 						<hr />
 					</ui:repeat>
 
