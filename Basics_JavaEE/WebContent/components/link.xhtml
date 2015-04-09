@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>HR</title>
+</h:head>
+<h:body>
+
+	<!-- h:link, h:commandLink and h:outputLink tags are used to render a HTML “a” anchor element 
+	The “h:commandLink” tag is released since JSF 1.x, which is generate a link act like a submit button when clicked. (javascript)-->
+	
+	<!-- h:link” tag is a new tag in JSF 2.0 -->
+	<!-- outcome is the href url, should be an existing page, value is the text -->
+	<h:link value="simple link" outcome="/login" />
+
+	<br />
+
+	<h:link value="link with a parameter" outcome="selection">
+		<f:param name="uid" value="123" />
+	</h:link>
+
+</h:body>
+</html>
