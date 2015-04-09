@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateContactinformationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateContactinformationLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{contactinformationController.selected.id}" title="#{bundle.CreateContactinformationTitle_id}" required="true" requiredMessage="#{bundle.CreateContactinformationRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateContactinformationLabel_creationDate}" for="creationDate" />
+                    <h:inputText id="creationDate" value="#{contactinformationController.selected.creationDate}" title="#{bundle.CreateContactinformationTitle_creationDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateContactinformationLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{contactinformationController.selected.description}" title="#{bundle.CreateContactinformationTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateContactinformationLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{contactinformationController.selected.title}" title="#{bundle.CreateContactinformationTitle_title}" />
+                    <h:outputLabel value="#{bundle.CreateContactinformationLabel_updateDate}" for="updateDate" />
+                    <h:inputText id="updateDate" value="#{contactinformationController.selected.updateDate}" title="#{bundle.CreateContactinformationTitle_updateDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contactinformationController.create}" value="#{bundle.CreateContactinformationSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{contactinformationController.prepareList}" value="#{bundle.CreateContactinformationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateContactinformationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

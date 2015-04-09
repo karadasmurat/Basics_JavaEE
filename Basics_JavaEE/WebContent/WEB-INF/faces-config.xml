@@ -16,7 +16,7 @@
 	<application>
 		<message-bundle>web.messages.CustomMessages</message-bundle>
 		<resource-bundle>
-			<base-name>web.messages.Messages</base-name>
+			<base-name>web.messages.Bundle</base-name>
 			<var>bundle</var>
 		</resource-bundle>
 		<locale-config>
