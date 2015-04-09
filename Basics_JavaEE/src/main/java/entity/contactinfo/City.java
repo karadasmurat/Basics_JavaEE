@@ -7,12 +7,13 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({ 
-	@NamedQuery(name="City.findAll", query="SELECT c FROM City c")
+	@NamedQuery(name="City.findAll", query="SELECT c FROM City c"),
+	@NamedQuery(name = "City.findByName", query = "SELECT c FROM City c WHERE c.name = :name"),
 })
 public class City {
 	
 	@Id //no generator
-	private long id;
+	private Long id;
 	private String name;
 	
 	public City() {
@@ -41,34 +42,50 @@ public class City {
 		this.name = name;
 	}
 	
-	public boolean equals(Object obj) {
-
-		if (this == obj) {
+	@Override
+	public boolean equals(Object arg) {
+		
+		/*
+		* THIS	OTHER(not null)
+		* ----	-----
+		* null	null	:fail
+		* null	value	:fail
+		* value	null	:fail
+		* value	value	:compare
+		*/
+		
+		if (this == arg) {
 			return true;
 		}
 
-		if ((obj == null) || (obj.getClass() != this.getClass())) {
+		if ((arg == null) || (arg.getClass() != this.getClass())) {
 			return false;
 		}
 
-		City obj2 = (City) obj;
+		City other = (City) arg;
 		
-		if (getName() == null || obj2.getName() == null) {
+		//id is not DB generated, it is dim fix.
+		if (this.id == null || other.id == null ) {
 			return false;
 		}
-
-		return getName().equals(obj2.getName());
+        
+		return this.id.equals(other.id);
 	}
 
-
+	@Override
 	public int hashCode() {
 
 		int result = 0;
-		result = getName().hashCode();		
+		result += (this.id != null ? this.id.hashCode() : 0);		
         result = 29 * result; // +getAnotherField();
         return result;
 
 	}
+	
+    @Override
+    public String toString() {
+        return "entity.contactinfo.City[ id=" + id + " ]";
+    }
 	
 	
 

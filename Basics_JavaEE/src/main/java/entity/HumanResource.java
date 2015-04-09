@@ -1,16 +1,22 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import entity.contactinfo.ContactInformation;
 
@@ -19,7 +25,10 @@ import entity.contactinfo.ContactInformation;
  *
  */
 @Entity
-
+@NamedQueries({ 
+	@NamedQuery(name="HumanResource.findAll", query="SELECT h FROM HumanResource h"),
+	@NamedQuery(name = "HumanResource.findByLastName", query = "SELECT h FROM HumanResource h WHERE h.lastName = :lastName")
+})
 public class HumanResource implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +56,14 @@ public class HumanResource implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name="CONTACTINFO_ID")
 	private ContactInformation contactInfo;
+	
+	@CreationTimestamp
+	@Column(name = "CREATION_DATE", updatable = false)
+	private Calendar creationDate;
+
+	@UpdateTimestamp
+	@Column(name = "UPDATE_DATE")
+	private Calendar updateDate;
 
 	public HumanResource() {
 		super();
@@ -118,6 +135,22 @@ public class HumanResource implements Serializable {
 	}
 	public void setContactInfo(ContactInformation contactInfo) {
 		this.contactInfo = contactInfo;
+	}
+
+	public Calendar getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Calendar creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Calendar getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Calendar updateDate) {
+		this.updateDate = updateDate;
 	}
 	
 	

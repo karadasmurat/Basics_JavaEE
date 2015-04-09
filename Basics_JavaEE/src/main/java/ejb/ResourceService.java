@@ -27,6 +27,7 @@ public interface ResourceService {
 	
 	PhoneSubType findPhoneSubType(Long pid);
 	List<PhoneSubType> findPhoneSubTypes();
+	List<HumanResource> findHumanResources();
 	
 
 	

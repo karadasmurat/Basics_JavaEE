@@ -42,7 +42,7 @@
 								<h:message id="m2" for="fname" errorClass="label label-danger" />
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<h:outputLabel value="Surname" styleClass="control-label col-xs-2" />
 							<div class="col-xs-10">
@@ -108,7 +108,7 @@
 							<h:outputText value="Address:" />
 							<hr />
 
-							<ui:repeat value="#{hrBean.humanResource.contactInfo.addresses}" var="addr">
+							<ui:repeat value="#{hrBean.humanResource.contactInfo.addresses.toArray()}" var="addr">
 								<div class="form-group">
 									<h:outputLabel value="Title:" styleClass="control-label col-xs-2" />
 									<div class="col-xs-10">
@@ -138,8 +138,8 @@
 
 
 						<!-- h:commandButton outputs a <input type="submit"> -->
-						<h:commandButton type="submit" id="addAddr" value="Add Another Address To This Resource"
-							action="#{hrBean.addAddress()}" styleClass="btn btn-default pull-right">
+						<h:commandButton type="submit" id="addAddr" value="&#xf067; Add Another Address To This Resource"
+							action="#{hrBean.addAddress()}" styleClass="FA btn btn-default pull-right">
 							<f:ajax execute="@form" render="addrDIV" />
 
 						</h:commandButton>
@@ -150,7 +150,7 @@
 							<h:outputText value="Phone:" />
 							<hr />
 
-							<ui:repeat value="#{hrBean.humanResource.contactInfo.phoneNumbers}" var="pn">
+							<ui:repeat value="#{hrBean.humanResource.contactInfo.phoneNumbers.toArray()}" var="pn">
 
 								<div class="row">
 
@@ -199,15 +199,21 @@
 						</h:panelGroup>
 
 						<!-- h:commandButton outputs a <input type="submit"> -->
-						<h:commandButton type="submit" id="addPhone" value="Add Another Phone To This Resource"
-							action="#{hrBean.addPhone()}" styleClass="btn btn-default pull-right">
+						<h:commandButton type="submit" id="addPhone" value="&#xf067; Add Another Phone To This Resource"
+							action="#{hrBean.addPhone()}" styleClass="FA btn btn-default pull-right">
 							<f:ajax execute="@form" render="phoneDIV" />
 
 						</h:commandButton>
 
 						<br />
 
-						<h:commandButton type="submit" id="create" value="Save" action="#{hrBean.createHR}" styleClass="btn btn-danger" />
+						<!-- h:commandButton outputs a <input type="submit"> -->
+						<h:commandButton type="submit" id="create02" value="&#xf00c; Save" action="#{hrBean.createHR}" styleClass="FA btn btn-success" />
+						
+						<h:link outcome="list" styleClass="btn btn-warning">
+							<i class="fa fa-times"></i> Cancel
+						</h:link>
+
 					</fieldset>
 				</h:form>
 			</h:panelGroup>

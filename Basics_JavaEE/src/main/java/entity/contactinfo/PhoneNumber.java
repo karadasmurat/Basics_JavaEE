@@ -146,6 +146,50 @@ public class PhoneNumber implements Serializable {
 		this.contactInformation = contactInformation;
 	}
 	
+	@Override
+	public boolean equals(Object arg) {
+		
+		/*
+		* THIS	OTHER(not null)
+		* ----	-----
+		* null	null	:fail
+		* null	value	:fail
+		* value	null	:fail
+		* value	value	:compare
+		*/
+		
+		if (this == arg) {
+			return true;
+		}
+
+		if ((arg == null) || (arg.getClass() != this.getClass())) {
+			return false;
+		}
+
+		PhoneNumber other = (PhoneNumber) arg;
+		
+		if (this.phoneNumber == null || other.phoneNumber == null ) {
+			return false;
+		}
+        
+		return this.phoneNumber.equals(other.phoneNumber);
+	}
+
+	@Override
+	public int hashCode() {
+
+		int result = 0;	
+		result += (this.phoneNumber != null ? this.phoneNumber.hashCode() : 0);
+        result = 29 * result; // +getAnotherField();
+        return result;
+
+	}
+	
+    @Override
+    public String toString() {
+        return "entity.contactinfo.PhoneNumber[ phoneNumber=" + phoneNumber + " ]";
+    }
+	
 	
 
 }

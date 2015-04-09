@@ -46,6 +46,8 @@ public class HrBean implements Serializable {
 	private Set<PhoneSubType> allPhoneSubTypes;
 
 	HumanResource humanResource;
+	
+	List<HumanResource> allHumanResources;
 
 	public HrBean() {
 		super();
@@ -57,6 +59,9 @@ public class HrBean implements Serializable {
 		allCompanies = resourceService.findCompanies();
 		allCities = resourceService.findCities();
 		allPhoneTypes = resourceService.findPhoneTypes();
+
+		//moved to getter
+		//allHumanResources = resourceService.findHumanResources();
 
 		// will be triggered by phoneType change event.
 		// allPhoneSubTypes = resourceService.findPhoneSubTypes();
@@ -98,7 +103,7 @@ public class HrBean implements Serializable {
 		// merge - company gives detached exception //converter.
 		resourceService.mergeHumanResource(this.humanResource);
 
-		return "";
+		return "list";
 	}
 
 	public List<Car> getCars() {
@@ -167,6 +172,27 @@ public class HrBean implements Serializable {
 		allPhoneSubTypes = pt.getPhoneSubTypes(); 
 		
 		LOGGER.log(Level.FINE, "allPhoneSubTypes count: "+ allPhoneSubTypes.size() ) ;
+	}
+
+	public List<HumanResource> getAllHumanResources() {
+		List<HumanResource> hrList = resourceService.findHumanResources();
+		return hrList;
+	}
+
+	public void setAllHumanResources(List<HumanResource> allHumanResources) {
+		this.allHumanResources = allHumanResources;
+	}
+	
+	public String prepareEdit(HumanResource hr){
+		
+		this.humanResource = hr;
+		return "create";
+	}
+	
+	public String prepareCreate(){
+		
+		this.humanResource = new HumanResource();
+		return "create";
 	}
 
 }

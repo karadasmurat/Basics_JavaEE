@@ -13,18 +13,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import basic.Item;
+
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
+    @NamedQuery(name = "Address.findByTitle", query = "SELECT a FROM Address a WHERE a.title = :title"),
+})
 public class Address implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "AddressIncGenerator")
 	@GenericGenerator(name = "AddressIncGenerator", strategy = "increment")
-	private long id;
+	private Long id;
 	
 	private String title;
 	private String description;
@@ -140,6 +150,51 @@ public class Address implements Serializable {
 		this.contactInformation = contactInformation;
 		
 	}
+	
+	
+	@Override
+	public boolean equals(Object arg) {
+		
+		/*
+		* THIS	OTHER(not null)
+		* ----	-----
+		* null	null	:fail
+		* null	value	:fail
+		* value	null	:fail
+		* value	value	:compare
+		*/
+		
+		if (this == arg) {
+			return true;
+		}
+
+		if ((arg == null) || (arg.getClass() != this.getClass())) {
+			return false;
+		}
+
+		Address other = (Address) arg;
+		
+		if (this.address == null || other.address == null ) {
+			return false;
+		}
+        
+		return this.address.equals(other.address);
+	}
+
+	@Override
+	public int hashCode() {
+
+		int result = 0;
+		result += (this.address != null ? this.address.hashCode() : 0);
+        result = 29 * result; // +getAnotherField();
+        return result;
+
+	}
+	
+    @Override
+    public String toString() {
+        return "entity.contactinfo.Address[ id=" + id + " ]";
+    }
 	
 	
 	

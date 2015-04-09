@@ -3,7 +3,9 @@ package entity.contactinfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,9 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +22,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity 
+@NamedQueries({
+    @NamedQuery(name = "ContactInformation.findAll", query = "SELECT c FROM ContactInformation c")
+})
+
 public class ContactInformation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,10 +39,10 @@ public class ContactInformation implements Serializable {
 	private String description;
 	
 	@OneToMany(fetch=FetchType.EAGER, targetEntity = Address.class, mappedBy="contactInformation", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private List<Address> addresses;
+	private Set<Address> addresses;
 	
 	@OneToMany(fetch=FetchType.EAGER, targetEntity = PhoneNumber.class, mappedBy="contactInformation", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private List<PhoneNumber> phoneNumbers;
+	private Set<PhoneNumber> phoneNumbers;
 	
 	@CreationTimestamp
 	@Column(name = "CREATION_DATE", updatable = false)
@@ -54,8 +59,8 @@ public class ContactInformation implements Serializable {
 	
 	private void initialize(){
 
-		phoneNumbers = new ArrayList<PhoneNumber>(1);
-		addresses = new ArrayList<Address>(1);
+		phoneNumbers = new HashSet<PhoneNumber>(1);
+		addresses = new HashSet<Address>(1);
 		
 		//bidirectional addToList
 		this.addAddress(new Address());
@@ -99,19 +104,19 @@ public class ContactInformation implements Serializable {
 		this.description = description;
 	}
 
-	public List<Address> getAddresses() {
+	public Set<Address> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 
-	public List<PhoneNumber> getPhoneNumbers() {
+	public Set<PhoneNumber> getPhoneNumbers() {
 		return phoneNumbers;
 	}
 
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+	public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 
@@ -130,7 +135,5 @@ public class ContactInformation implements Serializable {
 	public void setUpdateDate(Calendar updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	
 
 }

@@ -92,4 +92,12 @@ public class ResourceServiceImpl implements ResourceService {
 
 	}
 
+	@Override
+	public List<HumanResource> findHumanResources() {
+		
+		Query query = em.createNamedQuery("HumanResource.findAll");
+
+		return query.getResultList();
+	}
+
 }

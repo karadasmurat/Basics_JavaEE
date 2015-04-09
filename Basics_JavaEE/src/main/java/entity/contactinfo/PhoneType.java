@@ -70,31 +70,7 @@ public class PhoneType implements Serializable {
 
 	}
 	
-	public boolean equals(Object obj) {
 
-		if (this == obj) {
-			return true;
-		}
-
-		if ((obj == null) || (obj.getClass() != this.getClass())) {
-			return false;
-		}
-
-		PhoneType obj2 = (PhoneType) obj;
-
-		// return getId() == obj2.getId() && getName().equals(obj2.getName());
-		return getTitle().equals(obj2.getTitle());
-	}
-
-
-	public int hashCode() {
-
-		int result = 0;
-		result = getTitle().hashCode();		
-        result = 29 * result; // +getAnotherField();
-        return result;
-
-	}
 
 	public long getId() {
 		return id;
@@ -127,5 +103,49 @@ public class PhoneType implements Serializable {
 	public void setPhoneSubTypes(Set<PhoneSubType> phoneSubTypes) {
 		this.phoneSubTypes = phoneSubTypes;
 	}	
+	
+	@Override
+	public boolean equals(Object arg) {
+		
+		/*
+		* THIS	OTHER(not null)
+		* ----	-----
+		* null	null	:fail
+		* null	value	:fail
+		* value	null	:fail
+		* value	value	:compare
+		*/
+		
+		if (this == arg) {
+			return true;
+		}
+
+		if ((arg == null) || (arg.getClass() != this.getClass())) {
+			return false;
+		}
+
+		PhoneType other = (PhoneType) arg;
+		
+		if (this.title == null || other.title == null ) {
+			return false;
+		}
+        
+		return this.title.equals(other.title);
+	}
+
+	@Override
+	public int hashCode() {
+
+		int result = 0;
+		result += (this.title != null ? this.title.hashCode() : 0);
+        result = 29 * result; // +getAnotherField();
+        return result;
+
+	}
+	
+    @Override
+    public String toString() {
+        return "entity.contactinfo.PhoneType[ title=" + title + " ]";
+    }
 
 }

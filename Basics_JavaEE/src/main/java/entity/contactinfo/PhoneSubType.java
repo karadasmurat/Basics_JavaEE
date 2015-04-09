@@ -24,14 +24,15 @@ import org.hibernate.envers.Audited;
 		@NamedQuery(name = "PhoneSubType.findByTitle", query = "SELECT pst FROM PhoneSubType pst where pst.title = :title") })
 public class PhoneSubType implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(generator = "PhoneSubTypeIncGenerator")
 	@GenericGenerator(name = "PhoneSubTypeIncGenerator", strategy = "increment")
 	private Long id;
 
 	private String title;
-	private String description;
-	private static final long serialVersionUID = 1L;
+	private String description;	
 
 	@ManyToMany( targetEntity = PhoneType.class, mappedBy = "phoneSubTypes" )
 	private Set<PhoneType> phoneTypes;
@@ -73,32 +74,49 @@ public class PhoneSubType implements Serializable {
 		this.phoneTypes = phoneTypes;
 	}
 	
-	
-	public boolean equals(Object obj) {
-
-		if (this == obj) {
+	@Override
+	public boolean equals(Object arg) {
+		
+		/*
+		* THIS	OTHER(not null)
+		* ----	-----
+		* null	null	:fail
+		* null	value	:fail
+		* value	null	:fail
+		* value	value	:compare
+		*/
+		
+		if (this == arg) {
 			return true;
 		}
 
-		if ((obj == null) || (obj.getClass() != this.getClass())) {
+		if ((arg == null) || (arg.getClass() != this.getClass())) {
 			return false;
 		}
 
-		PhoneSubType obj2 = (PhoneSubType) obj;
-
-		// return getId() == obj2.getId() && getName().equals(obj2.getName());
-		return getTitle().equals(obj2.getTitle());
+		PhoneSubType other = (PhoneSubType) arg;
+		
+		if (this.title == null || other.title == null ) {
+			return false;
+		}
+        
+		return this.title.equals(other.title);
 	}
 
-
+	@Override
 	public int hashCode() {
 
-		int result = 0;
-		result = getTitle().hashCode();		
+		int result = 0;	
+		result += (this.title != null ? this.title.hashCode() : 0);
         result = 29 * result; // +getAnotherField();
         return result;
 
 	}
+	
+    @Override
+    public String toString() {
+        return "entity.contactinfo.PhoneSubType[ id=" + id + " ]";
+    }
 	
 	
 
