@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>HR</title>
 </h:head>
@@ -11,32 +11,31 @@
 
 		<ui:define name="contents">
 
-			<h:panelGroup layout="block" styleClass="form-group">
-				<h:form>
+			<h:panelGroup layout="block" styleClass="container">
+				<h:form styleClass="form-group">
 
 					<h:panelGroup layout="block" styleClass="bg-warning" rendered="#{empty hrBean.allHumanResources}">
 						<h:outputText value="No records found." />
 					</h:panelGroup>
 
-					<h:dataTable value="#{hrBean.allHumanResources}" var="hr" styleClass="table table-hover"
-						rendered="#{not empty hrBean.allHumanResources}">
-						<h:column>
-							<f:facet name="header">Name</f:facet>
-    					#{hr.firstName} #{hr.lastName}
-  					</h:column>
-						<h:column>
-							<f:facet name="header">E-mail</f:facet>
-    					#{hr.primaryEmail}
-  					</h:column>
-						<h:column>
-							<f:facet name="header">Action</f:facet>
+					<p:dataTable value="#{hrBean.allHumanResources}" var="hr" rows="3" paginator="true" paginatorPosition="bottom"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" rendered="#{not empty hrBean.allHumanResources}" tableStyleClass="table">
 
+						<p:column sortBy="#{hr.lastName}" headerText="Name">
+							<h:outputText value="#{hr.firstName} #{hr.lastName}" />
+						</p:column>
+						<p:column headerText="E-mail">
+							<h:outputText value="#{hr.primaryEmail}" />
+
+						</p:column>
+						<p:column headerText="Action">
 							<h:commandLink action="#{hrBean.prepareEdit(hr)}">
 								<span class="glyphicon glyphicon-edit" /> Edit
 							</h:commandLink>
-						</h:column>
+						</p:column>
 
-					</h:dataTable>
+					</p:dataTable>
 
 					<br />
 
@@ -46,10 +45,6 @@
 					</h:commandLink>
 
 				</h:form>
-
-
-
-
 
 			</h:panelGroup>
 		</ui:define>
