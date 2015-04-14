@@ -4,6 +4,15 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
 	<title>HR</title>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="../resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
+
+	<script src="../resources/js/jquery/jquery-1.11.2.min.js"></script>
+	<script src="../resources/css/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+	
 </h:head>
 <h:body>
 
@@ -12,13 +21,24 @@
 	
 	<!-- h:link” tag is a new tag in JSF 2.0 -->
 	<!-- outcome is the href url, should be an existing page, value is the text -->
-	<h:link value="simple link" outcome="/login" />
+	<!-- relative to contextpath, unlike a href="#{request.contextPath}/user/create.xhtml" -->
+	<h:link value="simple link" outcome="/user/create.xhtml" />
+	
+	<br />
+	
+	<h:link outcome="/login" > <span class="glyphicon glyphicon-home"></span> Glyphicon Support</h:link>
 
 	<br />
 
 	<h:link value="link with a parameter" outcome="selection">
 		<f:param name="uid" value="123" />
 	</h:link>
+	
+	<br />
+	
+	<h:commandLink action="#{hrBean.prepareCreate()}" styleClass="btn btn-success">
+						<i class="fa fa-plus"></i> Create New HR
+					</h:commandLink>
 
 </h:body>
 </html>

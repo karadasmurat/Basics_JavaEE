@@ -15,9 +15,9 @@
 </h:head>
 <h:body>
 	<!-- In the template client, everything outside ui:composition is ignored -->
-	<ui:composition>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
+
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
 					aria-expanded="false" aria-controls="navbar">
@@ -27,9 +27,11 @@
 				<a class="navbar-brand" href="#">BCM</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
+
 				<ul class="nav navbar-nav">
-					<li class="active"><h:link outcome="/todo/index.xhtml"><span class="glyphicon glyphicon-home"></span> Home</h:link></li>
-					<li class="active"><h:link outcome="/todo/index.xhtml"><span class="glyphicon glyphicon-home"></span> Context</h:link></li>
+				
+
+
 					<li class="active"><h:link outcome="/support/index.xhtml"><span class="glyphicon glyphicon-home"></span> Support</h:link></li>
 					
 					<li class="dropdown">
@@ -48,7 +50,7 @@
 					<li class="active"><h:link outcome="/todo/index.xhtml"><span class="glyphicon glyphicon-home"></span> Performance</h:link></li>
 					
 				</ul>
-
+				
 				<h:form>
 					<ul class="nav navbar-nav navbar-right">
 
@@ -70,8 +72,7 @@
 
 			</div>
 			<!--/.nav-collapse -->
-		</div>
 	</nav>
-	</ui:composition>
+	
 </h:body>
 </html>

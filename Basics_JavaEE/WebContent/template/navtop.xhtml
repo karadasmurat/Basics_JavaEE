@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>BCM Navigation</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
+
+	<h:outputScript library="js" name="jquery/jquery-1.11.2.min.js" />
+	<h:outputScript library="css" name="bootstrap-3.3.2/js/bootstrap.min.js" />
+
+	<link type="text/css" rel="stylesheet" href="../resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+</h:head>
+<h:body>
+	<!-- In the template client, everything outside ui:composition is ignored -->
+	<ui:composition>
+	
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+						aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">BCM</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<h:form>
+						<ul class="nav navbar-nav">
+
+							<ui:repeat value="#{moduleBean.allModules}" var="mdl">
+								<li class="active"><h:commandLink action="#{moduleBean.prepareModuleDetails(mdl)}" >
+										<span class="#{mdl.icon}"></span> #{mdl.name}</h:commandLink></li>
+							</ui:repeat>
+
+							<li class="active"><h:link outcome="/todo/index.xhtml">
+									<span class="glyphicon glyphicon-home"></span> Home</h:link></li>
+							<li class="active"><h:link outcome="/todo/index.xhtml">
+									<span class="glyphicon glyphicon-home"></span> Context</h:link></li>
+							<li class="active"><h:link outcome="/support/index.xhtml">
+									<span class="glyphicon glyphicon-home"></span> Support</h:link></li>
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-expanded="false">Operation <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><h:link outcome="/user/create.xhtml">
+											<span class="glyphicon glyphicon-plus-sign"></span> Business Impact Analysis</h:link></li>
+									<li><h:link outcome="/user/create.xhtml">
+											<span class="glyphicon glyphicon-plus-sign"></span> Risk Assessment</h:link></li>
+									<li><h:link outcome="/user/create.xhtml">
+											<span class="glyphicon glyphicon-plus-sign"></span> Business Continuity Planning</h:link></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">Nav header</li>
+									<li><h:link outcome="/user/create.xhtml">
+											<span class="glyphicon glyphicon-plus-sign"></span> Business Continuity Strategy</h:link></li>
+									<li><h:link outcome="/user/create.xhtml">
+											<span class="glyphicon glyphicon-plus-sign"></span> Create User</h:link></li>
+								</ul></li>
+
+							<li class="active"><h:link outcome="/todo/index.xhtml">
+									<span class="glyphicon glyphicon-home"></span> Performance</h:link></li>
+
+						</ul>
+					</h:form>
+					<h:form>
+						<ul class="nav navbar-nav navbar-right">
+
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> Signed in as
+									#{navBean.mkPrincipal.user.lastName} <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+									<li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i>Tasks</a></li>
+									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Messages</a></li>
+									<li class="divider"></li>
+									<li><h:commandLink action="#{navBean.logout}">
+											<i class="fa fa-power-off" aria-hidden="true"></i> Logout
+										</h:commandLink></li>
+								</ul></li>
+						</ul>
+					</h:form>
+
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+	</ui:composition>
+</h:body>
+</html>

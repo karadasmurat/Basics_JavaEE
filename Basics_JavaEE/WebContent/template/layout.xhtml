@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="Business Continuity Management" />
+	<meta name="keywords" content="BCM, Business Continuity Management" />
+	<meta name="author" content="Murat Karadas" />
+
+	<title><ui:insert name="title">:: Business Continuity</ui:insert></title>
+
+	<!-- glyphicon problem when using h:outputStylesheet -->
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-3.3.2/css/bootstrap.min.css" />
+
+	<h:outputScript library="js" name="jquery/jquery-1.11.2.min.js" />
+	<h:outputScript library="css" name="bootstrap-3.3.2/js/bootstrap.min.js" />
+
+	<!-- image problem when using h:outputStylesheet -->
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/font-awesome-4.3.0/css/font-awesome.min.css" />
+
+	<h:outputStylesheet library="css" name="footer-distributed-with-address-and-phones.css" />
+
+	<h:outputStylesheet library="css" name="navside.css" />
+	<!-- TODO: debug dropdown-menu -->
+	<!-- <h:outputStylesheet library="css" name="nav.css" />-->
+
+	<h:outputStylesheet library="css" name="datatable.css" />
+
+	<h:outputStylesheet library="primefaces-mk" name="theme.css" />
+	<link type="text/css" rel="stylesheet" href="../resources/primefaces-mk/theme.css" />
+
+	<!-- GOOGLE FONTS-->
+	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css" />
+	<!--<link href="../resources/fonts/fonts_cookie.css" rel="stylesheet" type="text/css" />-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+	<style>
+body {
+	padding-top: 51px;
+	background-color: #292c2f;
+}
+
+#contentArea {
+	background-color: white;
+}
+
+.FA {
+	font-family: FontAwesome;
+}
+
+#leftNAV.affix {
+	top: 60px; /* Set the top position of pinned element */
+}
+</style>
+
+</h:head>
+<body data-spy="scroll" data-target="#myScrollspy">
+
+	<div id="header" class="container-fluid">
+		<ui:insert name="header">
+			<ui:include src="navtop.xhtml" />
+		</ui:insert>
+	</div>
+
+	<div id="contentArea" class="container-fluid">
+
+		<div class="row no-gutter">
+
+			<div class="col-sm-2 hidden-xs nopadding">
+				<ui:insert name="navside">
+					<ui:include src="navside.xhtml" />
+				</ui:insert>
+			</div>
+			<div class="col-sm-10 nopadding" style="border-left: 1px solid #EBEBEB;">
+
+				<h:panelGroup layout="block" id="contents">
+					<ui:insert name="contents">
+						<ui:include src="contents.xhtml" />
+					</ui:insert>
+				</h:panelGroup>
+
+			</div>
+		</div>
+	</div>
+
+
+	<h:panelGroup layout="block" id="footer">
+		<ui:insert name="footer">
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+	</h:panelGroup>
+
+
+	<script>
+     // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
+    $('.dropdown').on('show.bs.dropdown', function(e){
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+    });
+
+    // ADD SLIDEUP ANIMATION TO DROPDOWN //
+    $('.dropdown').on('hide.bs.dropdown', function(e){
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+    });
+</script>
+</body>
+</html>

@@ -28,6 +28,8 @@
 		<class>entity.questionnaire.Choice</class>
 		<class>entity.questionnaire.Answer</class>
 		<class>entity.Company</class>
+		<class>entity.Module</class>
+		<class>entity.ModuleLink</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
